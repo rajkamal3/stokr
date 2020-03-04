@@ -5,14 +5,17 @@ import styles from './invest.module.css';
 class Screener extends Component {
     companiesFilter () {
         var input = document.querySelector('.inputValue').value.toLowerCase();
-        var companiesArray = document.querySelectorAll('.companyName');
+        var companiesNamesArray = document.querySelectorAll('.companyName');
+        var companiesSectorArray = document.querySelectorAll('.companySector');
         var companyRow = document.querySelectorAll('.companyRow');
         
-        for (var i = 0; i < companiesArray.length; i++) {
-            var currentCompany = companiesArray[i];
+        for (var i = 0; i < companiesNamesArray.length; i++) {
+            var currentCompany = companiesNamesArray[i];
+            var currentSector = companiesSectorArray[i];
             var currentCompanyName = currentCompany.textContent || currentCompany.innerText;
+            var currentSectorName = currentSector.textContent || currentSector.innerText;
             
-            if (currentCompanyName.toLowerCase().indexOf(input) > -1) {
+            if (currentCompanyName.toLowerCase().indexOf(input) > -1 || currentSectorName.toLowerCase().indexOf(input) > -1) {
                 companyRow[i].style.display = '';
             } else {
                 companyRow[i].style.display = 'none';

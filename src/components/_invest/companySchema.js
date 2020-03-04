@@ -70,9 +70,9 @@ class CompanySchema extends Component {
         return (
             <div className={[styles.companyContainer, 'companyRow'].join(' ')}>
                 <div><a className='companyName' style={anchorStyles} target='_blank' href={'http://www.google.com/search?q=' + this.state.companyDetails.companyName + ' share'}>{this.state.companyDetails.companyName}</a></div>
-                <div>Sector: {this.state.companyDetails.sector}</div>
+                <div className='companySector'>Sector: {this.state.companyDetails.sector}</div>
                 <div>Share Price: {this.state.companyDetails.sharePrice}</div>
-                <div>Day's Change: {this.state.companyDetails.dayChange}</div>
+                <div className={['dayChange', 'dummy'].join(' ')}>Day's Change: {this.state.companyDetails.dayChange}</div>
                 <div>52 Week Low: {this.state.companyDetails.oneYearLow}</div>
                 <div>52 Week High: {this.state.companyDetails.oneYearHigh}</div>
                 <div>Market Cap: {this.state.companyDetails.marketCap}</div>

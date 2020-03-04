@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CompanySchema from './companySchema';
+import IndicesSchema from './indicesSchema';
 import styles from './invest.module.css';
 
 class Screener extends Component {
@@ -63,6 +64,8 @@ class Screener extends Component {
         const vipIndustries = 'https://www.moneycontrol.com/india/stockpricequote/plastics/vipindustries/VIP';
         const voltas = 'https://www.moneycontrol.com/india/stockpricequote/diversified/voltas/V';
         const whirlpool = 'https://www.moneycontrol.com/india/stockpricequote/consumer-goods-white-goods/whirlpoolindia/WI';
+        
+        const indices = 'https://www.moneycontrol.com/';
 
         const companies = [aartiIndustries, apolloTyres, asianPaints, bajajAuto, bergerPaints, britannia, cclProducts, colgate, dmart, dilipBuildcon, exideInd, finolexCables,
         godrejConsumer, gujAlkali, hdfcBank, hdfcLife, hul, havells, iciciLombard, itc, indusindBank, jubilantFood, kotakMahindra, lupin, marico, mindtree, mothersonSumi,
@@ -73,6 +76,7 @@ class Screener extends Component {
                 <div className={styles.header}>
                     <input onChange={this.companiesFilter.bind(this)} type='textbox' placeholder='Search for companies...' className={[styles.textbox, 'inputValue'].join(' ')} />
                 </div>
+                <IndicesSchema link={indices} />
                 {companies.map((el) => {
                     return <CompanySchema key={Math.random()} link={el} />
                 })}

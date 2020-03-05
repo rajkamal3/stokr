@@ -52,13 +52,19 @@ class IndicesSchema extends Component {
     }
 
     render () {
+        const anchorStyles = {
+            color: 'white',
+            fontWeight: 'bold',
+            textDecoration: 'none'
+        };
+
         return (
             <div className={styles.indices}>
                 <div>
-                    Nifty: {this.state.indices.nifty} {this.state.indices.niftyPointChange} {this.state.indices.niftyPercentageChange}%
+                    <a className='indexName' style={anchorStyles} target='_blank' href={'http://www.google.com/search?q=nifty50'}>Nifty: {this.state.indices.nifty} {this.state.indices.niftyPointChange} {this.state.indices.niftyPercentageChange}%</a>
                 </div>
                 <div>
-                    Sensex: {this.state.indices.sensex} {this.state.indices.sensexPointChange} {this.state.indices.sensexPercentageChange}%
+                    <a className='indexName' style={anchorStyles} target='_blank' href={'http://www.google.com/search?q=sensex'}>Sensex: {this.state.indices.sensex} {this.state.indices.sensexPointChange} {this.state.indices.sensexPercentageChange}%</a>
                 </div>
             </div>
         )

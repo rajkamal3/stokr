@@ -28,3 +28,14 @@
             background-color: #333743;
       }
 }
+
+@media only screen and (min-width: 769px) {
+      .holder {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            max-width: 100vw;
+            color: #feffff;
+            background-color: #333743;
+      }
+}

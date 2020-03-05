@@ -26,15 +26,13 @@ class IndicesSchema extends Component {
 
         axios.get(this.props.link, header).then(res => {
             const parsed = parse(res.data);
-            console.log(parsed);
-
+            
             let nifty = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[1].querySelector('b');
             let niftyPointChange = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[2];
             let niftyPercentageChange = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[3];
             let sensex = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[1].querySelector('b');
             let sensexPointChange = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[2];
             let sensexPercentageChange = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[3];
-            console.log(nifty);
 
             this.setState({
                 indices: {

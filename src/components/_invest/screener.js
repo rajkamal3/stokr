@@ -28,48 +28,42 @@ class Screener extends Component {
         const aartiIndustries = 'https://www.moneycontrol.com/india/stockpricequote/chemicals/aartiindustries/AI45';
         const apolloTyres = 'https://www.moneycontrol.com/india/stockpricequote/tyres/apollotyres/AT14';
         const asianPaints = 'https://www.moneycontrol.com/india/stockpricequote/paintsvarnishes/asianpaints/AP31';
+        const avenueSupermarts = 'https://www.moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19';
         const bajajAuto = 'https://www.moneycontrol.com/india/stockpricequote/auto-23-wheelers/bajajauto/BA10';
+        const bajajFinance - 'https://www.moneycontrol.com/india/stockpricequote/finance-leasinghire-purchase/bajajfinance/BAF';
         const bergerPaints = 'https://www.moneycontrol.com/india/stockpricequote/paintsvarnishes/bergerpaintsindia/BPI02';
         const britannia = 'https://www.moneycontrol.com/india/stockpricequote/food-processing/britanniaindustries/BI';
-        const cclProducts = 'https://www.moneycontrol.com/india/stockpricequote/plantations-teacoffee/cclproductsindia/CC10';
-        const colgate = 'https://www.moneycontrol.com/india/stockpricequote/personal-care/colgatepalmoliveindia/CPI';
-        const dmart = 'https://www.moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19';
-        const dilipBuildcon = 'https://www.moneycontrol.com/india/stockpricequote/constructioncontracting-civil/dilipbuildcon/DB04';
-        const exideInd = 'https://www.moneycontrol.com/india/stockpricequote/auto-ancillaries/exideindustries/EI';
-        const finolexCables = 'https://www.moneycontrol.com/india/stockpricequote/cables-telephone/finolexcables/FC01';
         const godrejConsumer = 'https://www.moneycontrol.com/india/stockpricequote/personal-care/godrejconsumerproducts/GCP';
-        const gujAlkali = 'https://www.moneycontrol.com/india/stockpricequote/chemicals/gujaratalkalieschemicals/GAC01';
+        const havells = 'https://www.moneycontrol.com/india/stockpricequote/electric-equipment/havellsindia/HI01';
+        const hdfc = 'https://www.moneycontrol.com/india/stockpricequote/finance-housing/housingdevelopmentfinancecorporation/HDF';
         const hdfcBank = 'https://www.moneycontrol.com/india/stockpricequote/banks-private-sector/hdfcbank/HDF01';
         const hdfcLife = 'https://www.moneycontrol.com/india/stockpricequote/miscellaneous/hdfclifeinsurancecompanylimited/HSL01';
         const hul = 'https://www.moneycontrol.com/india/stockpricequote/personal-care/hindustanunilever/HU';
-        const havells = 'https://www.moneycontrol.com/india/stockpricequote/electric-equipment/havellsindia/HI01';
+        const iciciBank = 'https://www.moneycontrol.com/india/stockpricequote/banks-private-sector/icicibank/ICI02';
         const iciciLombard = 'https://www.moneycontrol.com/india/stockpricequote/diversified/icicilombardgeneralinsurancecompany/ILG';
-        const itc = 'https://www.moneycontrol.com/india/stockpricequote/cigarettes/itc/ITC';
         const indusindBank = 'https://www.moneycontrol.com/india/stockpricequote/banks-private-sector/indusindbank/IIB';
+        const infosys = 'https://www.moneycontrol.com/india/stockpricequote/computers-software/infosys/IT';
+        const itc = 'https://www.moneycontrol.com/india/stockpricequote/cigarettes/itc/ITC';
         const jubilantFood = 'https://www.moneycontrol.com/india/stockpricequote/miscellaneous/jubilantfoodworks/JF04';
         const kotakMahindra = 'https://www.moneycontrol.com/india/stockpricequote/banks-private-sector/kotakmahindrabank/KMB';
-        const lupin = 'https://www.moneycontrol.com/india/stockpricequote/pharmaceuticals/lupin/L';
         const marico = 'https://www.moneycontrol.com/india/stockpricequote/personal-care/marico/M13';
-        const mindtree = 'https://www.moneycontrol.com/india/stockpricequote/computers-software/mindtree/MT13';
-        const mothersonSumi = 'https://www.moneycontrol.com/india/stockpricequote/auto-ancillaries/mothersonsumisystems/MSS01';
         const muthootFinance = 'https://www.moneycontrol.com/india/stockpricequote/finance-investments/muthootfinance/MF10';
-        const nbccIndia = 'https://www.moneycontrol.com/india/stockpricequote/infrastructure-general/nbccindia/NBC01';
-        const ncc = 'https://www.moneycontrol.com/india/stockpricequote/constructioncontracting-civil/ncc/NCC01';
         const nestle = 'https://www.moneycontrol.com/india/stockpricequote/food-processing/nestleindia/NI';
         const pidiliteInd = 'https://www.moneycontrol.com/india/stockpricequote/chemicals/pidiliteindustries/PI11';
         const relaxoFootwear = 'https://www.moneycontrol.com/india/stockpricequote/leather-products/relaxofootwears/RF07';
+        const reliance = 'https://www.moneycontrol.com/india/stockpricequote/refineries/relianceindustries/RI';
         const sbiLife = 'https://www.moneycontrol.com/india/stockpricequote/diversified/sbilifeinsurancecompany/SLI03';
-        const sunTv = 'https://www.moneycontrol.com/india/stockpricequote/mediaentertainment/suntvnetwork/STN01';
         const tcs = 'https://www.moneycontrol.com/india/stockpricequote/computers-software/tataconsultancyservices/TCS';
+        const titan = 'https://www.moneycontrol.com/india/stockpricequote/miscellaneous/titancompany/TI01';
         const vipIndustries = 'https://www.moneycontrol.com/india/stockpricequote/plastics/vipindustries/VIP';
         const voltas = 'https://www.moneycontrol.com/india/stockpricequote/diversified/voltas/V';
-        const whirlpool = 'https://www.moneycontrol.com/india/stockpricequote/consumer-goods-white-goods/whirlpoolindia/WI';
         
         const indices = 'https://www.moneycontrol.com/';
 
-        const companies = [aartiIndustries, apolloTyres, asianPaints, bajajAuto, bergerPaints, britannia, cclProducts, colgate, dmart, dilipBuildcon, exideInd, finolexCables,
-        godrejConsumer, gujAlkali, hdfcBank, hdfcLife, hul, havells, iciciLombard, itc, indusindBank, jubilantFood, kotakMahindra, lupin, marico, mindtree, mothersonSumi,
-        muthootFinance, nbccIndia, ncc, nestle, pidiliteInd, relaxoFootwear, sbiLife, sunTv, tcs, vipIndustries, voltas, whirlpool];
+        const companies = [aartiIndustries, apolloTyres, asianPaints, avenueSupermarts, bajajAuto, bajajFinance,
+        bergerPaints, britannia, godrejConsumer, havells, hdfc, hdfcBank, hdfcLife, hul, iciciBank, iciciLombard,
+        indusindBank, infosys, itc, jubilantFood, kotakMahindra, marico, muthootFinance, nestle, pidiliteInd,
+        relaxoFootwear, reliance, sbiLife, tcs, titan, vipIndustries, voltas];
 
         return (
             <div className={styles.container}>

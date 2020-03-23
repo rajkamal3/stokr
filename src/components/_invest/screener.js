@@ -30,7 +30,7 @@ class Screener extends Component {
         const asianPaints = 'https://www.moneycontrol.com/india/stockpricequote/paintsvarnishes/asianpaints/AP31';
         const avenueSupermarts = 'https://www.moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19';
         const bajajAuto = 'https://www.moneycontrol.com/india/stockpricequote/auto-23-wheelers/bajajauto/BA10';
-        const bajajFinance - 'https://www.moneycontrol.com/india/stockpricequote/finance-leasinghire-purchase/bajajfinance/BAF';
+        const bajajFinance = 'https://www.moneycontrol.com/india/stockpricequote/finance-leasinghire-purchase/bajajfinance/BAF';
         const bergerPaints = 'https://www.moneycontrol.com/india/stockpricequote/paintsvarnishes/bergerpaintsindia/BPI02';
         const britannia = 'https://www.moneycontrol.com/india/stockpricequote/food-processing/britanniaindustries/BI';
         const godrejConsumer = 'https://www.moneycontrol.com/india/stockpricequote/personal-care/godrejconsumerproducts/GCP';

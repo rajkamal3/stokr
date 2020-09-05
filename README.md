@@ -1,5 +1,4 @@
-[Stock Screener](https://stockscreener.netlify.app)
-[https://stockscreener.netlify.app/](stockscreener.netlify.app/)
+### [Stock Screener](https://stockscreener.netlify.app)
 
 In the project directory, you can run:
 

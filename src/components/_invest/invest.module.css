@@ -16,9 +16,16 @@
     padding-left: 7px;
     margin: 1px 0px;
     background-color: #18151e;
-    box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+    box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
     color: white;
     font-size: 100%;
+}
+
+.indicesContainer {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 0 30px 0 rgba(10, 9, 15, 0.5);
+    border-radius: 10px;
 }
 
 .indices {
@@ -26,13 +33,11 @@
     justify-content: space-around;
     font-size: 150%;
     width: 100%;
-    height: 70px;
+    height: 60px;
     background-color: #17141d;
     align-items: center;
-    border-radius: 10px;
     margin-bottom: 15px;
     font-weight: bold;
-    box-shadow: 0 0 30px 0 rgba(10, 9, 15, 0.5);
 }
 
 .header {
@@ -52,18 +57,16 @@
     }
 
     .companyContainer {
-        background-color: #17141d;
         padding: 8px;
-        display: grid;
         grid-template-rows: repeat(9, 30px);
         grid-template-columns: repeat(1, 1fr);
         margin-bottom: 8px;
         width: 92vw;
         border-radius: 10px;
-        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
     }
-    
+
     .textbox {
         height: 40px;
         border: none;
@@ -73,18 +76,26 @@
         padding-left: 7px;
         margin: 1px 0px;
         background-color: #18151e;
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
         color: white;
         font-size: 100%;
     }
-    
+
     .header {
         width: 100%;
         background-color: #100f17;
         padding-top: 8px;
         padding-bottom: 8px;
     }
-    
+
+    .indicesContainer {
+        display: flex;
+        width: 100%;
+        box-shadow: 0 0 30px 0 rgba(10, 9, 15, 0.5);
+        border-radius: 10px;
+        flex-direction: column;
+    }
+
     .indices {
         display: -ms-flexbox;
         display: flex;
@@ -93,12 +104,12 @@
         justify-content: space-around;
         font-size: 110%;
         width: 100%;
-        height: 80px;
+        height: 60px;
         background-color: #17141d;
         -ms-flex-align: center;
         align-items: center;
         border-radius: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 }
 
@@ -119,10 +130,10 @@
         margin-bottom: 15px;
         width: 92vw;
         border-radius: 10px;
-        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
     }
-    
+
     .textbox {
         height: 40px;
         border: none;
@@ -132,16 +143,29 @@
         padding-left: 7px;
         margin: 1px 0px;
         background-color: #18151e;
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
         color: white;
         font-size: 100%;
     }
-    
+
     .header {
         width: 100%;
         background-color: #100f17;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    .indices {
+        height: 60px;
+        border-radius: 10px;
+    }
+
+    .indicesContainer {
+        display: flex;
+        width: 100%;
+        box-shadow: 0 0 30px 0 rgba(10, 9, 15, 0.5);
+        border-radius: 10px;
+        flex-direction: column;
     }
 }
 
@@ -162,10 +186,10 @@
         margin-bottom: 15px;
         width: 92vw;
         border-radius: 10px;
-        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        -webkit-box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
     }
-    
+
     .textbox {
         height: 40px;
         border: none;
@@ -175,15 +199,23 @@
         padding-left: 7px;
         margin: 1px 0px;
         background-color: #18151e;
-        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.50);
+        box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
         color: white;
         font-size: 100%;
     }
-    
+
     .header {
         width: 100%;
         background-color: #100f17;
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+
+    .indices {
+        border-radius: 0;
+    }
+
+    .indicesContainer {
+        border-radius: 10px;
     }
 }

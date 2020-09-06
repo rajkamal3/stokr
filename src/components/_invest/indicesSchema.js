@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import parse from 'node-html-parser';
 import styles from './invest.module.css';
 
 class IndicesSchema extends Component {
@@ -8,50 +7,30 @@ class IndicesSchema extends Component {
         super(props);
 
         this.state = {
-            indices: {
-                
-            }
-        }
+            indices: {}
+        };
     }
 
     componentDidMount() {
-        const header = {
-            "Access-Control-Allow-Credentials": "true",
-            "Access-Control-Allow-Origin": "*",
-            "User-Agent": "PostmanRuntime/7.22.0",
-            "Accept": "*/*",
-            "Postman-Token": "6dd814e9-4517-4ab3-8b14-0d4630576312",
-            "X-Frame-Options": "SAMEORIGIN"
-        }
-
-        axios.get(this.props.link, header).then(res => {
-            const parsed = parse(res.data);
-            
-            let nifty = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[1].querySelector('b');
-            let niftyPointChange = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[2];
-            let niftyPercentageChange = parsed.querySelector('#market_action').querySelectorAll('tr')[1].querySelectorAll('td')[3];
-            let sensex = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[1].querySelector('b');
-            let sensexPointChange = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[2];
-            let sensexPercentageChange = parsed.querySelector('#market_action').querySelectorAll('tr')[2].querySelectorAll('td')[3];
-
-            this.setState({
-                indices: {
-                    "sensex": sensex.innerHTML,
-                    "sensexPointChange": sensexPointChange.innerHTML,
-                    "sensexPercentageChange": sensexPercentageChange.innerHTML,
-                    "nifty": nifty.innerHTML,
-                    "niftyPointChange": niftyPointChange.innerHTML,
-                    "niftyPercentageChange": niftyPercentageChange.innerHTML,
-                    "niftyMidcap": '',
-                    "niftySmallcap": ''
-                }
+        axios
+            .get(`https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3B${this.props.id}`)
+            .then((res) => {
+                let details = res.data.data;
+                this.setState({
+                    indices: {
+                        name: details.company,
+                        current: details.pricecurrent,
+                        pointChange: details.pricechange,
+                        percentageChange: details.PERCCHANGE
+                    }
+                });
             })
-        }).catch((err) => {
-            console.log(err);
-        });
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
-    render () {
+    render() {
         const anchorStyles = {
             color: 'white',
             fontWeight: 'bold',
@@ -60,16 +39,19 @@ class IndicesSchema extends Component {
 
         return (
             <div className={styles.indices}>
-                <div>
-                    <a className='indexName' style={anchorStyles} target='_blank' href={'http://www.google.com/search?q=nifty50'}>Nifty: {this.state.indices.nifty} {this.state.indices.niftyPointChange} {this.state.indices.niftyPercentageChange}%</a>
-                </div>
-                <div>
-                    <a className='indexName' style={anchorStyles} target='_blank' href={'http://www.google.com/search?q=sensex'}>Sensex: {this.state.indices.sensex} {this.state.indices.sensexPointChange} {this.state.indices.sensexPercentageChange}%</a>
-                </div>
+                <a
+                    className="indexName"
+                    style={anchorStyles}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={`http://www.google.com/search?q=${this.state.indices.name}`.toLowerCase()}
+                >
+                    {this.state.indices.name} {this.state.indices.current} {this.state.indices.pointChange}{' '}
+                    {this.state.indices.percentageChange}%
+                </a>
             </div>
-        )
+        );
     }
-
 }
 
 export default IndicesSchema;

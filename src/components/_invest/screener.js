@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CompanySchema from './companySchema';
 import IndicesSchema from './indicesSchema';
+import USIndicesSchema from './usIndicesSchema';
 import styles from './invest.module.css';
 
 class Screener extends Component {
@@ -61,6 +62,7 @@ class Screener extends Component {
         ];
 
         const indices = ['NSX', 'SEN'];
+        const usIndices = ['GSPC', 'IXIC'];
 
         return (
             <div className={styles.container}>
@@ -75,6 +77,9 @@ class Screener extends Component {
                 <div className={styles.indicesContainer}>
                     {indices.map((el) => {
                         return <IndicesSchema key={el} id={el} />;
+                    })}
+                    {usIndices.map((el) => {
+                        return <USIndicesSchema key={el} id={el} />;
                     })}
                 </div>
 

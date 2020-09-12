@@ -46,8 +46,9 @@ class IndicesSchema extends Component {
                     rel="noopener noreferrer"
                     href={`http://www.google.com/search?q=${this.state.indices.name}`.toLowerCase()}
                 >
-                    {this.state.indices.name} {this.state.indices.current} {this.state.indices.pointChange}{' '}
-                    {this.state.indices.percentageChange}%
+                    {this.state.indices.name} {this.state.indices.current}
+                    <br />
+                    {this.state.indices.pointChange} {this.state.indices.percentageChange}%
                 </a>
             </div>
         );

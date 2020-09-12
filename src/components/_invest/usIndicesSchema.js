@@ -45,7 +45,7 @@ class USIndicesSchema extends Component {
                     rel="noopener noreferrer"
                     href={`http://www.google.com/search?q=${this.props.id === 'GSPC' ? 'S%26P%20500' : 'NASDAQ%20100'}`.toLowerCase()}
                 >
-                    {this.props.id === 'GSPC' ? 'S&P 500' : 'NASDAQ 100'}
+                    {this.props.id === 'GSPC' ? 'S&P 500' : 'NASDAQ 100'}&nbsp;
                     {this.state.indices.spxValue}
                     <br />
                     {this.state.indices.spxChange}

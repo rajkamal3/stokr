@@ -25,7 +25,6 @@ class USIndicesSchema extends Component {
                     spxChange: spxChange
                 }
             });
-            console.log(this.state);
         });
     }
 

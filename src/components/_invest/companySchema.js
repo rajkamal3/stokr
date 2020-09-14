@@ -56,7 +56,7 @@ class CompanySchema extends Component {
                         style={anchorStyles}
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={('http://www.google.com/search?q=' + this.state.companyDetails.companyName + ' share').toLowerCase()}
+                        href={('http://www.bing.com/search?q=' + this.state.companyDetails.companyName + ' share').toLowerCase()}
                     >
                         {this.state.companyDetails.companyName}
                     </a>

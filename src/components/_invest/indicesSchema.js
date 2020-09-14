@@ -48,7 +48,7 @@ class IndicesSchema extends Component {
                 >
                     {this.state.indices.name} {this.state.indices.current}
                     <br />
-                    {this.state.indices.pointChange} {this.state.indices.percentageChange}%
+                    {(this.state.indices.pointChange * 1).toFixed(2)} {this.state.indices.percentageChange}%
                 </a>
             </div>
         );

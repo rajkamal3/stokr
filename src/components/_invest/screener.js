@@ -5,7 +5,6 @@ import USIndicesSchema from './usIndicesSchema';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './invest.module.css';
-import Exp from './exp';
 
 class Screener extends Component {
     state = {
@@ -13,14 +12,10 @@ class Screener extends Component {
         newCompany: null
     };
 
-    addNewCompany = (res) => {
-        console.log('[Add new company]' + this.state.newCompany);
-    };
-
     companiesFilter = () => {
         var input = document.querySelector('.inputValue').value.toLowerCase();
 
-        if (input.length >= 5) {
+        if (input.length >= 3) {
             axios
                 .get(`https://cors-anywhere.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
                 .then((res) => {
@@ -44,9 +39,9 @@ class Screener extends Component {
                         })
                         .then((compCode) => {
                             axios.get(`https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/${compCode}`).then((res) => {
-                                // const huellResp = res.data.data;
                                 this.setState({ newCompany: res.data.data });
-                                const huellHTML = (
+                                console.log(this.state);
+                                const searchResEl = (
                                     <div
                                         style={{
                                             width: '50%',
@@ -64,31 +59,41 @@ class Screener extends Component {
                                         {res.data.data !== null ? <span>{res.data.data.SC_FULLNM}</span> : 'No company with that name...'}
                                     </div>
                                 );
-                                this.setState({ searchResults: huellHTML });
-                                // console.log(res.data.data);
+                                this.setState({ searchResults: searchResEl });
                             });
                         });
                 });
         } else {
             this.setState({ searchResults: '' });
         }
+    };
 
-        // var companiesNamesArray = document.querySelectorAll('.companyName');
-        // var companiesSectorArray = document.querySelectorAll('.companySector');
-        // var companyRow = document.querySelectorAll('.companyRow');
-
-        // for (var i = 0; i < companiesNamesArray.length; i++) {
-        //     var currentCompany = companiesNamesArray[i];
-        //     var currentSector = companiesSectorArray[i];
-        //     var currentCompanyName = currentCompany.textContent || currentCompany.innerText;
-        //     var currentSectorName = currentSector.textContent || currentSector.innerText;
-
-        //     if (currentCompanyName.toLowerCase().indexOf(input) > -1 || currentSectorName.toLowerCase().indexOf(input) > -1) {
-        //         companyRow[i].style.display = '';
-        //     } else {
-        //         companyRow[i].style.display = 'none';
-        //     }
-        // }
+    addNewCompany = () => {
+        const lastEl = document.querySelector('.container').lastChild.classList;
+        var newCompanyEl = `
+            <div class=${lastEl}>
+                <div>
+                    <a
+                        class="companyName"
+                        style="color: white; font-weight: bold"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href=${('http://www.bing.com/search?q=' + this.state.newCompany.SC_FULLNM + ' share').toLowerCase()}
+                    >
+                        ${this.state.newCompany.SC_FULLNM}
+                    </a>
+                </div>
+                <div class="companySector">Sector: ${this.state.newCompany.SC_SUBSEC}</div>
+                <div>Share Price: ${this.state.newCompany.pricecurrent}</div>
+                <div class="dayChange dummy">Day's Change: ${(this.state.newCompany.pricepercentchange * 1).toFixed(2)}%</div>
+                <div>52 Week Low: ${this.state.newCompany['52L']}</div>
+                <div>52 Week High: ${this.state.newCompany['52H']}</div>
+                <div>Market Cap: ${this.state.newCompany.MKTCAP}</div>
+                <div>PE Ratio: ${this.state.newCompany.PE}</div>
+                <div>Industry PE: ${this.state.newCompany.IND_PE}</div>
+            </div>
+        `;
+        document.querySelector('.container').insertAdjacentHTML('beforeend', newCompanyEl);
     };
 
     render() {
@@ -130,19 +135,10 @@ class Screener extends Component {
         const indices = ['NSX', 'SEN'];
         const usIndices = ['GSPC', 'IXIC'];
 
-        // let renderedHTML;
-
-        // this.state.searchResults !== '' ? (renderedHTML = <span>{this.state.searchResults.SC_FULLNM}</span>) : null;
-
         return (
-            <div className={styles.container}>
+            <div className={[styles.container, 'container'].join(' ')}>
                 <div className={styles.header}>
-                    <input
-                        // onChange={this.companiesFilter.bind(this)}
-                        type="textbox"
-                        placeholder="Search for companies..."
-                        className={[styles.textbox, 'inputValue'].join(' ')}
-                    />
+                    <input type="textbox" placeholder="Search for companies..." className={[styles.textbox, 'inputValue'].join(' ')} />
                     <button
                         style={{
                             marginLeft: '-16%',
@@ -158,10 +154,6 @@ class Screener extends Component {
                     </button>
                     {this.state.searchResults}
                 </div>
-
-                {/* <Exp /> 
-                <input type="hidden" id="scid" name="scid" value="AT">
-                */}
 
                 <div className={styles.indicesContainer}>
                     {indices.map((el) => {

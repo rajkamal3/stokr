@@ -4,13 +4,9 @@ import { parse } from 'node-html-parser';
 import styles from './invest.module.css';
 
 class USIndicesSchema extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            indices: {}
-        };
-    }
+    state = {
+        indices: {}
+    };
 
     componentDidMount() {
         axios.get(`https://cors-anywhere.herokuapp.com/https://finance.yahoo.com/quote/%5E${this.props.id}`).then((res) => {

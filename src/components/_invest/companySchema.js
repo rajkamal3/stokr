@@ -3,13 +3,9 @@ import axios from 'axios';
 import styles from './invest.module.css';
 
 class CompanySchema extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            companyDetails: {}
-        };
-    }
+    state = {
+        companyDetails: {}
+    };
 
     componentDidMount() {
         axios

@@ -3,13 +3,9 @@ import axios from 'axios';
 import styles from './invest.module.css';
 
 class IndicesSchema extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            indices: {}
-        };
-    }
+    state = {
+        indices: {}
+    };
 
     componentDidMount() {
         axios

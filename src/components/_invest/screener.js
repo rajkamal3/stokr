@@ -42,16 +42,7 @@ class Screener extends Component {
                             const parsed = parse(res.data);
                             var compCode = parsed.querySelector('#scid').attributes.value;
                             const currentIds = this.state.ids;
-
-                            for (let i = 0; i < currentIds.length; i++) {
-                                if (currentIds.indexOf(compCode) === -1) {
-                                    currentIds.unshift(compCode);
-                                } else {
-                                    alert('Company already added');
-                                    return;
-                                }
-                            }
-
+                            currentIds.unshift(compCode);
                             this.setState({ ids: currentIds });
                             console.log(this.state.ids);
                             axios.put('https://stokr-beta.firebaseio.com/companies/.json', currentIds).then((res) => {

@@ -46,7 +46,12 @@ class CompanySchema extends Component {
 
         return (
             <div className={[styles.companyContainer, 'companyRow'].join(' ')}>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}
+                >
                     <a
                         className="companyName"
                         style={anchorStyles}
@@ -56,6 +61,9 @@ class CompanySchema extends Component {
                     >
                         {this.state.companyDetails.companyName}
                     </a>
+                    <div data-id={this.props.id} onClick={this.props.clicked}>
+                        CR
+                    </div>
                 </div>
                 <div>Share Price: {this.state.companyDetails.sharePrice}</div>
                 <div>52 Week Low: {this.state.companyDetails.oneYearLow}</div>

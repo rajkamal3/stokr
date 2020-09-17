@@ -57,6 +57,19 @@ class Screener extends Component {
         this.setState({ showMenu: !this.state.showMenu });
     };
 
+    removeCompany = (comp) => {
+        const currentCompanies = this.state.ids;
+        const removeCompany = comp.target.getAttribute('data-id');
+        const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
+
+        currentCompanies.splice(removeCompanyIndex, 1);
+        console.log(currentCompanies);
+        this.setState({ ids: currentCompanies });
+        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
+            console.log(res);
+        });
+    };
+
     render() {
         const indices = ['NSX', 'SEN'];
         const usIndices = ['GSPC', 'IXIC'];
@@ -94,9 +107,9 @@ class Screener extends Component {
                 </div>
 
                 <div>
-                    {this.state.ids.length > 1
+                    {this.state.ids.length >= 1
                         ? this.state.ids.map((el) => {
-                              return <CompanySchema key={el} id={el} />;
+                              return <CompanySchema clicked={this.removeCompany} key={el} id={el} />;
                           })
                         : ''}
                 </div>

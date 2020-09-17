@@ -57,16 +57,16 @@ class CompanySchema extends Component {
                         {this.state.companyDetails.companyName}
                     </a>
                 </div>
-                <div className="companySector">Sector: {this.state.companyDetails.sector}</div>
                 <div>Share Price: {this.state.companyDetails.sharePrice}</div>
-                <div className={['dayChange', 'dummy'].join(' ')}>
-                    Day's Change: {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
-                </div>
                 <div>52 Week Low: {this.state.companyDetails.oneYearLow}</div>
                 <div>52 Week High: {this.state.companyDetails.oneYearHigh}</div>
                 <div>Market Cap: {this.state.companyDetails.marketCap}</div>
                 <div>PE Ratio: {this.state.companyDetails.peRatio}</div>
                 <div>Industry PE: {this.state.companyDetails.industryPe}</div>
+                <div className={['dayChange', 'dummy'].join(' ')}>
+                    Day's Change: {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
+                </div>
+                <div className="companySector">Sector: {this.state.companyDetails.sector}</div>
             </div>
         );
     }

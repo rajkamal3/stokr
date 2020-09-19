@@ -51,9 +51,11 @@
 }
 
 .hamburgerMenu {
-    width: 45px;
-    background-color: red;
+    width: 10%;
     z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sideMenu {
@@ -64,10 +66,10 @@
     left: 0;
     top: 0;
     z-index: 99999999;
-    background-color: greenyellow;
+    background-color: #100f17;
     padding: 32px 16px;
     box-sizing: border-box;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 .sideMenuOpen {
@@ -75,7 +77,7 @@
 }
 
 .sideMenuClose {
-    transform: translateX(-100%);
+    transform: translateX(-101%);
 }
 
 .modalOpen {
@@ -119,8 +121,9 @@
         border: none;
         border-radius: 10px;
         font-weight: bold;
-        width: 85%;
-        padding-left: 7px;
+        width: 65%;
+        padding-left: 10px;
+        box-sizing: border-box;
         margin: 1px 0px;
         background-color: #18151e;
         box-shadow: 0px 0px 30px 0px rgba(10, 9, 15, 0.5);
@@ -133,6 +136,8 @@
         background-color: #100f17;
         padding-top: 8px;
         padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .indicesContainer {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './invest.module.css';
+import cross from './../../assets/images/cross.png';
 
 class CompanySchema extends Component {
     state = {
@@ -61,8 +62,8 @@ class CompanySchema extends Component {
                     >
                         {this.state.companyDetails.companyName}
                     </a>
-                    <div data-id={this.props.id} onClick={this.props.clicked}>
-                        CR
+                    <div>
+                        <img data-id={this.props.id} onClick={this.props.clicked} src={cross} width="20px" alt="Delete" />
                     </div>
                 </div>
                 <div>Share Price: {this.state.companyDetails.sharePrice}</div>

@@ -6,6 +6,7 @@ import Sidebar from './sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './invest.module.css';
+import hamburger from './../../assets/images/hamburger.png';
 
 class Screener extends Component {
     state = {
@@ -23,6 +24,7 @@ class Screener extends Component {
         var input = document.querySelector('.inputValue').value.toLowerCase();
 
         if (input.length >= 3) {
+            document.querySelector('.inputValue').value = 'Adding...';
             axios
                 .get(`https://cors-anywhere.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
                 .then((res) => {
@@ -49,6 +51,10 @@ class Screener extends Component {
                                 console.log(res);
                             });
                         });
+                    document.querySelector('.inputValue').value = 'Added';
+                    setTimeout(() => {
+                        document.querySelector('.inputValue').value = '';
+                    }, 3000);
                 });
         }
     };
@@ -76,18 +82,19 @@ class Screener extends Component {
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
-                <Sidebar showMenu={this.state.showMenu} />
+                <Sidebar showMenu={this.state.showMenu} clicked={this.hideMenu} />
                 <div className={styles.header}>
-                    <div onClick={this.hideMenu.bind(this)} className={[styles.hamburgerMenu, 'burger'].join(' ')}></div>
+                    <div onClick={this.hideMenu.bind(this)} className={[styles.hamburgerMenu, 'burger'].join(' ')}>
+                        <img src={hamburger} width="30px" alt="Menu" />
+                    </div>
                     <input type="textbox" placeholder="Search for companies..." className={[styles.textbox, 'inputValue'].join(' ')} />
                     <button
                         style={{
-                            marginLeft: '-12%',
                             height: '100%',
-                            width: '45px',
+                            width: '15%',
                             borderRadius: '10px',
                             border: 'none',
-                            backgroundColor: 'rgb(255 0 0)',
+                            backgroundColor: '#17141d',
                             color: 'white'
                         }}
                         onClick={this.companiesFilter.bind(this)}

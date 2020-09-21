@@ -41,7 +41,7 @@ class Screener extends Component {
     };
 
     showAllCompanies = () => {
-        Array.from(document.querySelectorAll('.companyRow')).map((el) => {
+        Array.from(document.querySelectorAll('.companyRow')).forEach((el) => {
             el.style.display = 'grid';
         });
     };

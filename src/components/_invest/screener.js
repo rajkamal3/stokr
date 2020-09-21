@@ -31,8 +31,13 @@ class Screener extends Component {
             var currentSector = companiesSectorArray[i];
             var currentCompanyName = currentCompany.textContent || currentCompany.innerText;
             var currentSectorName = currentSector.textContent || currentSector.innerText;
+            var currentCompanyId = companiesNamesArray[i].getAttribute('data-nse');
 
-            if (currentCompanyName.toLowerCase().indexOf(input) > -1 || currentSectorName.toLowerCase().indexOf(input) > -1) {
+            if (
+                currentCompanyName.toLowerCase().indexOf(input) > -1 ||
+                currentSectorName.toLowerCase().indexOf(input) > -1 ||
+                currentCompanyId.toLowerCase().indexOf(input) > -1
+            ) {
                 companyRow[i].style.display = '';
             } else {
                 companyRow[i].style.display = 'none';
@@ -68,6 +73,10 @@ class Screener extends Component {
                         .get(`https://www.moneycontrol.com/india/stockpricequote/computers-software-training/aptech/${compCode}`)
                         .then((res) => {
                             const parsed = parse(res.data);
+                            if (!parsed.querySelector('#scid')) {
+                                alert('No company by that name!');
+                                return;
+                            }
                             var compCode = parsed.querySelector('#scid').attributes.value;
                             const currentIds = this.state.ids;
 

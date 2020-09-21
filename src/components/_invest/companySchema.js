@@ -24,7 +24,8 @@ class CompanySchema extends Component {
                         oneYearHigh: details['52H'],
                         marketCap: details.MKTCAP,
                         peRatio: details.PE,
-                        industryPe: details.IND_PE
+                        industryPe: details.IND_PE,
+                        nseId: details.NSEID
                     }
                 });
             })
@@ -55,6 +56,7 @@ class CompanySchema extends Component {
                 >
                     <a
                         className="companyName"
+                        data-nse={this.state.companyDetails.nseId}
                         style={anchorStyles}
                         target="_blank"
                         rel="noopener noreferrer"

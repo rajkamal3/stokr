@@ -60,7 +60,9 @@ class CompanySchema extends Component {
                         rel="noopener noreferrer"
                         href={('http://www.bing.com/search?q=' + this.state.companyDetails.companyName + ' share').toLowerCase()}
                     >
-                        {this.state.companyDetails.companyName}
+                        {`${this.state.companyDetails.companyName}`.length > 25
+                            ? `${this.state.companyDetails.companyName}`.substr(0, 25) + '...'
+                            : this.state.companyDetails.companyName}
                     </a>
                     <div>
                         <img data-id={this.props.id} onClick={this.props.clicked} src={cross} width="20px" alt="Delete" />

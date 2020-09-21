@@ -94,7 +94,7 @@ class Screener extends Component {
                 <Sidebar showMenu={this.state.showMenu} clicked={this.hideMenu} />
                 <div className={styles.header}>
                     <div onClick={this.hideMenu.bind(this)} className={[styles.hamburgerMenu, 'burger'].join(' ')}>
-                        <img src={hamburger} width="30px" alt="Menu" />
+                        <img src={hamburger} width="25px" alt="Menu" />
                     </div>
                     <input type="textbox" placeholder="Search for companies..." className={[styles.textbox, 'inputValue'].join(' ')} />
                     <button

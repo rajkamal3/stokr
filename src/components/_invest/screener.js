@@ -7,9 +7,6 @@ import Sidebar from './sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './invest.module.css';
-import hamburger from './../../assets/images/hamburger.png';
-import logo from './../../assets/images/logo.png';
-import extras from './../../assets/images/extras.png';
 
 class Screener extends Component {
     state = {

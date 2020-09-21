@@ -119,9 +119,10 @@
     .textbox {
         height: 40px;
         border: none;
-        border-radius: 10px;
-        font-weight: bold;
-        width: 65%;
+        border-radius: 100px;
+        font-weight: 100;
+        letter-spacing: 1px;
+        width: 85%;
         padding-left: 10px;
         box-sizing: border-box;
         margin: 1px 0px;
@@ -131,6 +132,10 @@
         font-size: 100%;
     }
 
+    .textbox:focus {
+        outline: none;
+    }
+
     .header {
         width: 100%;
         background-color: #100f17;
@@ -138,6 +143,13 @@
         padding-bottom: 8px;
         display: flex;
         justify-content: space-between;
+    }
+
+    .searchBar {
+        width: 100%;
+        justify-content: space-between;
+        display: flex;
+        margin-bottom: 6px;
     }
 
     .indicesContainer {

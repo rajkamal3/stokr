@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import CompanySchema from './companySchema';
 import IndicesSchema from './indicesSchema';
 import USIndicesSchema from './usIndicesSchema';
+import Header from './header';
 import Sidebar from './sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './invest.module.css';
 import hamburger from './../../assets/images/hamburger.png';
+import logo from './../../assets/images/logo.png';
+import extras from './../../assets/images/extras.png';
 
 class Screener extends Component {
     state = {
@@ -92,16 +95,14 @@ class Screener extends Component {
         return (
             <div className={[styles.container, 'container'].join(' ')}>
                 <Sidebar showMenu={this.state.showMenu} clicked={this.hideMenu} />
-                <div className={styles.header}>
-                    <div onClick={this.hideMenu.bind(this)} className={[styles.hamburgerMenu, 'burger'].join(' ')}>
-                        <img src={hamburger} width="25px" alt="Menu" />
-                    </div>
+                <Header clicked={this.hideMenu.bind(this)} />
+                <div className={[styles.searchBar, 'search'].join(' ')}>
                     <input type="textbox" placeholder="Search for companies..." className={[styles.textbox, 'inputValue'].join(' ')} />
                     <button
                         style={{
                             height: '100%',
                             width: '15%',
-                            borderRadius: '10px',
+                            borderRadius: '100px',
                             border: 'none',
                             backgroundColor: '#17141d',
                             color: 'white'
@@ -110,7 +111,6 @@ class Screener extends Component {
                     >
                         Add
                     </button>
-                    {this.state.searchResults}
                 </div>
 
                 <div className={styles.indicesContainer}>

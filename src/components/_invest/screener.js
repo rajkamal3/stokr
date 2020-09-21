@@ -74,7 +74,11 @@ class Screener extends Component {
                         .then((res) => {
                             const parsed = parse(res.data);
                             if (!parsed.querySelector('#scid')) {
-                                alert('No company by that name!');
+                                document.querySelector('.inputValue').value = 'No company by that name!';
+                                this.showAllCompanies();
+                                setTimeout(() => {
+                                    document.querySelector('.inputValue').value = '';
+                                }, 3000);
                                 return;
                             }
                             var compCode = parsed.querySelector('#scid').attributes.value;

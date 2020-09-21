@@ -139,10 +139,10 @@
     }
 
     .header {
-        width: 100%;
+        width: 100vw;
         background-color: #100f17;
-        padding-top: 8px;
-        padding-bottom: 8px;
+        box-sizing: border-box;
+        padding: 8px;
         display: flex;
         justify-content: space-between;
     }

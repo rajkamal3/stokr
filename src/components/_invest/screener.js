@@ -101,8 +101,11 @@ class Screener extends Component {
                             width: '15%',
                             borderRadius: '100px',
                             border: 'none',
-                            backgroundColor: '#17141d',
-                            color: 'white'
+                            backgroundColor: '#18151e',
+                            color: 'white',
+                            borderTopLeftRadius: '0',
+                            borderBottomLeftRadius: '0',
+                            boxShadow: '0px 0px 30px 0px rgba(10, 9, 15, 0.5)'
                         }}
                         onClick={this.companiesFilter.bind(this)}
                     >

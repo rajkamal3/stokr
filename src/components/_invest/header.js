@@ -11,7 +11,7 @@ const header = (props) => {
                 <img src={hamburger} width="25px" alt="Menu" />
             </div>
             <div className="logo">
-                <img src={logo} width="85px" alt="Logo" />
+                <img src={logo} width="75px" alt="Logo" />
             </div>
             <div className={[styles.hamburgerMenu, 'extras'].join(' ')}>
                 <img src={extras} width="25px" alt="Menu" />

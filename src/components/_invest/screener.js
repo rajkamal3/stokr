@@ -96,10 +96,7 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            console.log(this.state.ids);
-                            axios.put('https://stokr-beta.firebaseio.com/companies/.json', currentIds).then((res) => {
-                                console.log(res);
-                            });
+                            axios.put('https://stokr-beta.firebaseio.com/companies/.json', currentIds);
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -120,14 +117,11 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
-            console.log(res);
-        });
+        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids);
     };
 
     toggleSearchEngine = () => {
         this.setState({ searchEngine: !this.state.searchEngine });
-        console.log(this.state.searchEngine);
     };
 
     render() {

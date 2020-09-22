@@ -196,8 +196,8 @@
         box-shadow: 0 0 30px 0 rgba(10, 9, 15, 0.5);
     }
 
-    .custom-classname.react-toggle--checked .react-toggle-track {
-        background-color: #ab199f;
+    .react-toggle-track {
+        background-color: #08080c !important;
     }
 }
 

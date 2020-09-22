@@ -138,20 +138,7 @@ class Screener extends Component {
                         placeholder="Search for companies..."
                         className={[styles.textbox, 'inputValue'].join(' ')}
                     />
-                    <button
-                        style={{
-                            height: '100%',
-                            width: '15%',
-                            borderRadius: '100px',
-                            border: 'none',
-                            backgroundColor: '#18151e',
-                            color: 'white',
-                            borderTopLeftRadius: '0',
-                            borderBottomLeftRadius: '0',
-                            boxShadow: '0px 0px 30px 0px rgba(10, 9, 15, 0.5)'
-                        }}
-                        onClick={this.addNewCompany.bind(this)}
-                    >
+                    <button className={styles.addButton} onClick={this.addNewCompany.bind(this)}>
                         Add
                     </button>
                 </div>

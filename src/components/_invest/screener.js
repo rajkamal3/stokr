@@ -11,7 +11,9 @@ import styles from './invest.module.css';
 class Screener extends Component {
     state = {
         ids: [],
-        showMenu: false
+        showMenu: false,
+        modalActive: false,
+        searchEngine: false
     };
 
     componentDidMount() {
@@ -123,13 +125,24 @@ class Screener extends Component {
         });
     };
 
+    toggleSearchEngine = () => {
+        this.setState({ searchEngine: !this.state.searchEngine });
+        console.log(this.state.searchEngine);
+    };
+
     render() {
         const indices = ['NSX', 'SEN'];
         const usIndices = ['GSPC', 'IXIC'];
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
-                <Sidebar showMenu={this.state.showMenu} clicked={this.hideMenu} />
+                <Sidebar
+                    searchEngine={this.state.searchEngine}
+                    showMenu={this.state.showMenu}
+                    showModal={this.state.showModal}
+                    clicked={this.hideMenu}
+                    changed={this.toggleSearchEngine}
+                />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>
                     <input
@@ -145,17 +158,17 @@ class Screener extends Component {
 
                 <div className={styles.indicesContainer}>
                     {indices.map((el) => {
-                        return <IndicesSchema key={el} id={el} />;
+                        return <IndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
                     })}
                     {usIndices.map((el) => {
-                        return <USIndicesSchema key={el} id={el} />;
+                        return <USIndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
                     })}
                 </div>
 
                 <div className="companiesContainer">
                     {this.state.ids.length >= 1
                         ? this.state.ids.map((el) => {
-                              return <CompanySchema clicked={this.removeCompany} key={el} id={el} />;
+                              return <CompanySchema searchEngine={this.state.searchEngine} clicked={this.removeCompany} key={el} id={el} />;
                           })
                         : ''}
                 </div>

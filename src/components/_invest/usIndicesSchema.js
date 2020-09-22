@@ -31,6 +31,8 @@ class USIndicesSchema extends Component {
             textDecoration: 'none'
         };
 
+        const searchEngine = this.props.searchEngine ? 'google' : 'bing';
+
         return (
             <div className={styles.indices}>
                 <a
@@ -38,7 +40,9 @@ class USIndicesSchema extends Component {
                     style={anchorStyles}
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`http://www.google.com/search?q=${this.props.id === 'GSPC' ? 'S%26P%20500' : 'NASDAQ%20100'}`.toLowerCase()}
+                    href={`http://www.${searchEngine}.com/search?q=${
+                        this.props.id === 'GSPC' ? 'S%26P%20500' : 'NASDAQ%20100'
+                    }`.toLowerCase()}
                 >
                     {this.props.id === 'GSPC' ? 'S&P 500' : 'NASDAQ 100'}&nbsp;
                     {this.state.indices.spxValue}

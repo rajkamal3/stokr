@@ -46,6 +46,8 @@ class CompanySchema extends Component {
             fontWeight: 'bold'
         };
 
+        const searchEngine = this.props.searchEngine ? 'google' : 'bing';
+
         return (
             <div className={[styles.companyContainer, 'companyRow'].join(' ')}>
                 <div
@@ -60,7 +62,13 @@ class CompanySchema extends Component {
                         style={anchorStyles}
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={('http://www.bing.com/search?q=' + this.state.companyDetails.companyName + ' share').toLowerCase()}
+                        href={(
+                            'http://www.' +
+                            searchEngine +
+                            '.com/search?q=' +
+                            this.state.companyDetails.companyName +
+                            ' share'
+                        ).toLowerCase()}
                     >
                         {`${this.state.companyDetails.companyName}`.length > 25
                             ? `${this.state.companyDetails.companyName}`.substr(0, 25) + '...'

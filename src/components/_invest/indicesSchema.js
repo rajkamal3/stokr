@@ -33,6 +33,8 @@ class IndicesSchema extends Component {
             textDecoration: 'none'
         };
 
+        const searchEngine = this.props.searchEngine ? 'google' : 'bing';
+
         return (
             <div className={styles.indices}>
                 <a
@@ -40,7 +42,7 @@ class IndicesSchema extends Component {
                     style={anchorStyles}
                     target="_blank"
                     rel="noopener noreferrer"
-                    href={`http://www.google.com/search?q=${this.state.indices.name}`.toLowerCase()}
+                    href={`http://www.${searchEngine}.com/search?q=${this.state.indices.name}`.toLowerCase()}
                 >
                     {this.state.indices.name} {this.state.indices.current}
                     <br />

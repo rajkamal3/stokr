@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './invest.module.css';
 import Toggle from 'react-toggle';
-import 'react-toggle/style.css';
+import './../../assets/libraries/toggleStyles.css';
 import googleLogo from './../../assets/images/g.png';
 import bingLogo from './../../assets/images/b.png';
 
@@ -19,6 +19,10 @@ class Sidebar extends Component {
             showSideMenu = [styles.sideMenu, styles.sideMenuOpen].join(' ');
             modalActive = [styles.modal, styles.modalOpen].join(' ');
         }
+
+        const asty = {
+            backgroundColor: 'red !important'
+        };
 
         return (
             <div>
@@ -39,6 +43,7 @@ class Sidebar extends Component {
                                     checked: <img src={googleLogo} width="11px" alt="Google" />,
                                     unchecked: <img src={bingLogo} width="11px" alt="Bing" />
                                 }}
+                                className={asty}
                                 onChange={this.props.changed}
                             />
                         </div>

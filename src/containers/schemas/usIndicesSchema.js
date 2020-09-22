@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { parse } from 'node-html-parser';
-import styles from './invest.module.css';
+import styles from './schema.module.css';
 
 class USIndicesSchema extends Component {
     state = {

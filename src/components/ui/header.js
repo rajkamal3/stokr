@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './invest.module.css';
+import styles from './ui.module.css';
 import hamburger from './../../assets/images/hamburger.png';
 import logo from './../../assets/images/logo.png';
 import extras from './../../assets/images/extras.png';

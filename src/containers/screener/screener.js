@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import CompanySchema from './companySchema';
-import IndicesSchema from './indicesSchema';
-import USIndicesSchema from './usIndicesSchema';
-import Header from './header';
-import Sidebar from './sidebar';
+import CompanySchema from '../schemas/companySchema';
+import IndicesSchema from '../schemas/indicesSchema';
+import USIndicesSchema from '../schemas/usIndicesSchema';
+import Header from '../../components/ui/header';
+import Sidebar from '../../components/ui/sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
-import styles from './invest.module.css';
+import styles from './screener.module.css';
 
 class Screener extends Component {
     state = {

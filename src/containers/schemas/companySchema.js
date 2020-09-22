@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styles from './invest.module.css';
+import styles from './schema.module.css';
 import cross from './../../assets/images/cross.png';
 
 class CompanySchema extends Component {

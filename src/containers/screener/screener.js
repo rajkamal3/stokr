@@ -124,6 +124,45 @@ class Screener extends Component {
         this.setState({ searchEngine: !this.state.searchEngine });
     };
 
+    sort = () => {
+        var cos = document.querySelectorAll('.companyRow');
+        var arrc = [];
+        var newArr = [];
+
+        for (let i = 0; i < cos.length; i++) {
+            arrc.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.companyName').innerHTML });
+        }
+
+        arrc = arrc.sort(function (a, b) {
+            return a.value.localeCompare(b.value);
+        });
+
+        for (var i = 0; i < arrc.length; i++) {
+            newArr.push(arrc[i].key);
+        }
+
+        this.setState({ ids: newArr });
+
+        // by number
+        // var cos = document.querySelectorAll('.companyRow');
+        // var arrc = [];
+        // var newArr = [];
+
+        // for (let i = 0; i < cos.length; i++) {
+        //     arrc.push({ key: cos[i].querySelector('.marketCap').innerHTML, value: cos[i].innerHTML });
+        // }
+
+        // arrc = arrc.sort(function (a, b) {
+        //     return a.key - b.key;
+        // });
+
+        // for (var i = 0; i < arrc.length; i++) {
+        //     newArr.push(arrc[i].key);
+        // }
+
+        // console.log(newArr);
+    };
+
     render() {
         const indices = ['NSX', 'SEN'];
         const usIndices = ['GSPC', 'IXIC'];
@@ -136,6 +175,7 @@ class Screener extends Component {
                     showModal={this.state.showModal}
                     clicked={this.hideMenu}
                     changed={this.toggleSearchEngine}
+                    sorted={this.sort}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>

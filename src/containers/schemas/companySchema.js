@@ -9,6 +9,11 @@ class CompanySchema extends Component {
     };
 
     componentDidMount() {
+        this.getLiveData();
+        setInterval(this.getLiveData, 3000);
+    }
+
+    getLiveData = () => {
         axios
             .get(`https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/${this.props.id}`)
             .then((res) => {
@@ -32,7 +37,7 @@ class CompanySchema extends Component {
             .catch((err) => {
                 console.log(err);
             });
-    }
+    };
 
     render() {
         const companyDetails = this.state.companyDetails;
@@ -49,7 +54,7 @@ class CompanySchema extends Component {
         const searchEngine = this.props.searchEngine ? 'google' : 'bing';
 
         return (
-            <div className={[styles.companyContainer, 'companyRow'].join(' ')}>
+            <div data-id={this.props.id} className={[styles.companyContainer, 'companyRow'].join(' ')}>
                 <div
                     style={{
                         display: 'flex',
@@ -78,14 +83,28 @@ class CompanySchema extends Component {
                         <img data-id={this.props.id} onClick={this.props.clicked} src={cross} width="20px" alt="Delete" />
                     </div>
                 </div>
-                <div>Share Price: {this.state.companyDetails.sharePrice}</div>
+                <div>
+                    Share Price: <span className="sharePrice">{this.state.companyDetails.sharePrice}</span>
+                </div>
                 <div>52 Week Low: {this.state.companyDetails.oneYearLow}</div>
                 <div>52 Week High: {this.state.companyDetails.oneYearHigh}</div>
-                <div>Market Cap: {this.state.companyDetails.marketCap}</div>
-                <div>PE Ratio: {this.state.companyDetails.peRatio}</div>
-                <div>Industry PE: {this.state.companyDetails.industryPe}</div>
+                <div>
+                    Market Cap: <span className="marketCap">{this.state.companyDetails.marketCap}</span>
+                </div>
+                <div>
+                    PE Ratio: <span className="peRatio">{this.state.companyDetails.peRatio}</span>
+                </div>
+                <div>
+                    Industry PE: <span className="industryPe">{this.state.companyDetails.industryPe}</span>
+                </div>
                 <div className={['dayChange', 'dummy'].join(' ')}>
-                    Day's Change: {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
+                    Day's Change:{' '}
+                    <span
+                        style={this.state.companyDetails.dayChange * 1 < 0 ? { color: '#EF5350' } : { color: '#9CCC65' }}
+                        className="change"
+                    >
+                        {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
+                    </span>
                 </div>
                 <div className="companySector">Sector: {this.state.companyDetails.sector}</div>
             </div>

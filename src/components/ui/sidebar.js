@@ -42,6 +42,17 @@ class Sidebar extends Component {
                                 onChange={this.props.changed}
                             />
                         </div>
+                        <div className={styles.sortContainer}>
+                            Sort By:
+                            <div className={[styles.sortGridContainer, 'sort'].join(' ')}>
+                                <div onClick={this.props.sorted}>Name</div>
+                                <div>M. Cap</div>
+                                <div>Share Price</div>
+                                <div>Day Change</div>
+                                <div>PE Ratio</div>
+                                <div>Sector</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

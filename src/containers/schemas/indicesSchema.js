@@ -8,6 +8,11 @@ class IndicesSchema extends Component {
     };
 
     componentDidMount() {
+        this.getLiveData();
+        setInterval(this.getLiveData, 3000);
+    }
+
+    getLiveData = () => {
         axios
             .get(`https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3B${this.props.id}`)
             .then((res) => {
@@ -24,7 +29,7 @@ class IndicesSchema extends Component {
             .catch((err) => {
                 console.log(err);
             });
-    }
+    };
 
     render() {
         const anchorStyles = {

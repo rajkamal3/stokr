@@ -124,43 +124,86 @@ class Screener extends Component {
         this.setState({ searchEngine: !this.state.searchEngine });
     };
 
-    sort = () => {
-        var cos = document.querySelectorAll('.companyRow');
-        var arrc = [];
-        var newArr = [];
-
-        for (let i = 0; i < cos.length; i++) {
-            arrc.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.companyName').innerHTML });
-        }
-
-        arrc = arrc.sort(function (a, b) {
-            return a.value.localeCompare(b.value);
+    postData = () => {
+        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
+            document.querySelector('.sortSave').innerHTML = 'Saved!';
+            setTimeout(() => {
+                document.querySelector('.sortSave').innerHTML = 'Save';
+            }, 3000);
         });
+    };
 
-        for (var i = 0; i < arrc.length; i++) {
-            newArr.push(arrc[i].key);
+    sort = (by, cur) => {
+        let remove = ['sortByChange', 'sortByMcap', 'sortByName', 'sortByPeRatio', 'sortBySector', 'sortBySharePrice'];
+        const index = remove.indexOf(cur);
+        remove.splice(index, 1);
+
+        for (var j = 0; j < index; j++) {
+            document.querySelector('.' + remove[j]).querySelectorAll('span')[1].innerHTML = '';
         }
 
-        this.setState({ ids: newArr });
+        let dataOrder = document.querySelector('.' + cur);
+        if (dataOrder.getAttribute('data-order') === 'asc') {
+            dataOrder.setAttribute('data-order', 'desc');
+            dataOrder.querySelectorAll('span')[1].innerHTML = '&#9662;';
+        } else if (dataOrder.getAttribute('data-order') === 'desc') {
+            dataOrder.setAttribute('data-order', 'asc');
+            dataOrder.querySelectorAll('span')[1].innerHTML = '&#9652;';
+        }
 
-        // by number
-        // var cos = document.querySelectorAll('.companyRow');
-        // var arrc = [];
-        // var newArr = [];
+        var cos = document.querySelectorAll('.companyRow');
+        var sortArr = [];
+        var sortedArr = [];
 
-        // for (let i = 0; i < cos.length; i++) {
-        //     arrc.push({ key: cos[i].querySelector('.marketCap').innerHTML, value: cos[i].innerHTML });
-        // }
-
-        // arrc = arrc.sort(function (a, b) {
-        //     return a.key - b.key;
-        // });
-
-        // for (var i = 0; i < arrc.length; i++) {
-        //     newArr.push(arrc[i].key);
-        // }
-
-        // console.log(newArr);
+        if (by === 'companyName' || by === 'companySector') {
+            if (dataOrder.getAttribute('data-order') === 'asc') {
+                for (let i = 0; i < cos.length; i++) {
+                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
+                }
+                sortArr = sortArr.sort(function (a, b) {
+                    return a.value.localeCompare(b.value);
+                });
+                for (let i = 0; i < sortArr.length; i++) {
+                    sortedArr.push(sortArr[i].key);
+                }
+                this.setState({ ids: sortedArr });
+            } else if (dataOrder.getAttribute('data-order') === 'desc') {
+                for (let i = 0; i < cos.length; i++) {
+                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
+                }
+                sortArr = sortArr.sort(function (a, b) {
+                    return b.value.localeCompare(a.value);
+                });
+                for (let i = 0; i < sortArr.length; i++) {
+                    sortedArr.push(sortArr[i].key);
+                }
+                this.setState({ ids: sortedArr });
+            }
+        } else if (by === 'change' || by === 'marketCap' || by === 'peRatio' || by === 'sharePrice') {
+            if (dataOrder.getAttribute('data-order') === 'asc') {
+                for (let i = 0; i < cos.length; i++) {
+                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
+                }
+                sortArr = sortArr.sort(function (a, b) {
+                    return a.value.replace('%', '') - b.value.replace('%', '');
+                });
+                for (let i = 0; i < sortArr.length; i++) {
+                    sortedArr.push(sortArr[i].key);
+                }
+                this.setState({ ids: sortedArr });
+            } else if (dataOrder.getAttribute('data-order') === 'desc') {
+                for (let i = 0; i < cos.length; i++) {
+                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
+                }
+                sortArr = sortArr.sort(function (a, b) {
+                    return b.value.replace('%', '') - a.value.replace('%', '');
+                });
+                for (let i = 0; i < sortArr.length; i++) {
+                    sortedArr.push(sortArr[i].key);
+                }
+                this.setState({ ids: sortedArr });
+            }
+        }
     };
 
     render() {
@@ -176,6 +219,7 @@ class Screener extends Component {
                     clicked={this.hideMenu}
                     changed={this.toggleSearchEngine}
                     sorted={this.sort}
+                    postData={this.postData}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>

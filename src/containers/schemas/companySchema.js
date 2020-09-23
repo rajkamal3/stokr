@@ -10,7 +10,7 @@ class CompanySchema extends Component {
 
     componentDidMount() {
         this.getLiveData();
-        setInterval(this.getLiveData, 3000);
+        // setInterval(this.getLiveData, 50000000000);
     }
 
     getLiveData = () => {

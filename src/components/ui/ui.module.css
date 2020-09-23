@@ -58,7 +58,7 @@
 }
 
 .sortContainer {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .sortGridContainer {
@@ -71,8 +71,24 @@
     text-align: center;
 }
 
-.sortGridContainer * {
+.sortGridContainer > div {
     border: 1px solid white;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sortHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sortSave {
+    background-color: #17141d;
+    padding: 5px 15px;
+    border-radius: 50px;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {

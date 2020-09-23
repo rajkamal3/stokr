@@ -43,14 +43,61 @@ class Sidebar extends Component {
                             />
                         </div>
                         <div className={styles.sortContainer}>
-                            Sort By:
+                            <div className={styles.sortHead}>
+                                <div>Sort By:</div>
+                                <div className={[styles.sortSave, 'sortSave'].join(' ')} onClick={this.props.postData}>
+                                    Save
+                                </div>
+                            </div>
                             <div className={[styles.sortGridContainer, 'sort'].join(' ')}>
-                                <div onClick={this.props.sorted}>Name</div>
-                                <div>M. Cap</div>
-                                <div>Share Price</div>
-                                <div>Day Change</div>
-                                <div>PE Ratio</div>
-                                <div>Sector</div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'companyName', 'sortByName')}
+                                    data-order="asc"
+                                    className="sortByName"
+                                >
+                                    <span>Name</span>
+                                    <span></span>
+                                </div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'marketCap', 'sortByMcap')}
+                                    data-order="asc"
+                                    className="sortByMcap"
+                                >
+                                    <span>M. Cap</span>
+                                    <span></span>
+                                </div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'sharePrice', 'sortBySharePrice')}
+                                    data-order="asc"
+                                    className="sortBySharePrice"
+                                >
+                                    <span>Share Price</span>
+                                    <span></span>
+                                </div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'change', 'sortByChange')}
+                                    data-order="asc"
+                                    className="sortByChange"
+                                >
+                                    <span>Change</span>
+                                    <span></span>
+                                </div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'peRatio', 'sortByPeRatio')}
+                                    data-order="asc"
+                                    className="sortByPeRatio"
+                                >
+                                    <span>PE Ratio</span>
+                                    <span></span>
+                                </div>
+                                <div
+                                    onClick={this.props.sorted.bind(this, 'companySector', 'sortBySector')}
+                                    data-order="asc"
+                                    className="sortBySector"
+                                >
+                                    <span>Sector</span>
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
                     </div>

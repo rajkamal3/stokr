@@ -9,7 +9,7 @@ class IndicesSchema extends Component {
 
     componentDidMount() {
         this.getLiveData();
-        setInterval(this.getLiveData, 3000);
+        // setInterval(this.getLiveData, 5000000000);
     }
 
     getLiveData = () => {

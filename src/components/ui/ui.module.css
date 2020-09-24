@@ -1,5 +1,5 @@
 .header {
-    width: 1201px;
+    width: 100%;
     background-color: #100f17;
     position: sticky;
     top: 0;
@@ -116,7 +116,7 @@
 
 @media only screen and (min-width: 769px) {
     .header {
-        width: 100vw;
+        width: 100%;
         box-sizing: border-box;
         padding-top: 10px;
         padding-bottom: 10px;

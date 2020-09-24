@@ -133,6 +133,19 @@ class Screener extends Component {
         });
     };
 
+    createArrayForSorting = (cos, sortArr, by) => {
+        for (let i = 0; i < cos.length; i++) {
+            sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
+        }
+    };
+
+    createSortedArray = (sortArr, sortedArr) => {
+        for (let i = 0; i < sortArr.length; i++) {
+            sortedArr.push(sortArr[i].key);
+        }
+        this.setState({ ids: sortedArr });
+    };
+
     sort = (by, cur) => {
         let remove = ['sortByChange', 'sortByMcap', 'sortByName', 'sortByPeRatio', 'sortBySector', 'sortBySharePrice'];
         const index = remove.indexOf(cur);
@@ -157,51 +170,31 @@ class Screener extends Component {
 
         if (by === 'companyName' || by === 'companySector') {
             if (dataOrder.getAttribute('data-order') === 'asc') {
-                for (let i = 0; i < cos.length; i++) {
-                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
-                }
+                this.createArrayForSorting(cos, sortArr, by);
                 sortArr = sortArr.sort(function (a, b) {
                     return a.value.localeCompare(b.value);
                 });
-                for (let i = 0; i < sortArr.length; i++) {
-                    sortedArr.push(sortArr[i].key);
-                }
-                this.setState({ ids: sortedArr });
+                this.createSortedArray(sortArr, sortedArr);
             } else if (dataOrder.getAttribute('data-order') === 'desc') {
-                for (let i = 0; i < cos.length; i++) {
-                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
-                }
+                this.createArrayForSorting(cos, sortArr, by);
                 sortArr = sortArr.sort(function (a, b) {
                     return b.value.localeCompare(a.value);
                 });
-                for (let i = 0; i < sortArr.length; i++) {
-                    sortedArr.push(sortArr[i].key);
-                }
-                this.setState({ ids: sortedArr });
+                this.createSortedArray(sortArr, sortedArr);
             }
         } else if (by === 'change' || by === 'marketCap' || by === 'peRatio' || by === 'sharePrice') {
             if (dataOrder.getAttribute('data-order') === 'asc') {
-                for (let i = 0; i < cos.length; i++) {
-                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
-                }
+                this.createArrayForSorting(cos, sortArr, by);
                 sortArr = sortArr.sort(function (a, b) {
                     return a.value.replace('%', '') - b.value.replace('%', '');
                 });
-                for (let i = 0; i < sortArr.length; i++) {
-                    sortedArr.push(sortArr[i].key);
-                }
-                this.setState({ ids: sortedArr });
+                this.createSortedArray(sortArr, sortedArr);
             } else if (dataOrder.getAttribute('data-order') === 'desc') {
-                for (let i = 0; i < cos.length; i++) {
-                    sortArr.push({ key: cos[i].getAttribute('data-id'), value: cos[i].querySelector('.' + by).innerHTML });
-                }
+                this.createArrayForSorting(cos, sortArr, by);
                 sortArr = sortArr.sort(function (a, b) {
                     return b.value.replace('%', '') - a.value.replace('%', '');
                 });
-                for (let i = 0; i < sortArr.length; i++) {
-                    sortedArr.push(sortArr[i].key);
-                }
-                this.setState({ ids: sortedArr });
+                this.createSortedArray(sortArr, sortedArr);
             }
         }
     };

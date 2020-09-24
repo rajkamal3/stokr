@@ -77,18 +77,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 100px;
 }
 
 .sortHead {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .sortSave {
     background-color: #17141d;
     padding: 5px 15px;
     border-radius: 50px;
+    font-size: 85%;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {

@@ -20,6 +20,9 @@ class Screener extends Component {
         axios.get('https://stokr-beta.firebaseio.com/companies.json').then((res) => {
             this.setState({ ids: res.data });
         });
+        axios.get('https://stokr-beta.firebaseio.com/searchEngine.json').then((res) => {
+            this.setState({ searchEngine: res.data });
+        });
     }
 
     filterCompanies = () => {
@@ -124,6 +127,10 @@ class Screener extends Component {
         this.setState({ searchEngine: !this.state.searchEngine });
     };
 
+    saveSearchEngine = () => {
+        axios.put('https://stokr-beta.firebaseio.com/searchEngine/.json', this.state.searchEngine);
+    };
+
     postData = () => {
         axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
             document.querySelector('.sortSave').innerHTML = 'Saved!';
@@ -220,6 +227,7 @@ class Screener extends Component {
                     changed={this.toggleSearchEngine}
                     sorted={this.sort}
                     postData={this.postData}
+                    saveSearchEngine={this.saveSearchEngine}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>

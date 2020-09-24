@@ -55,12 +55,7 @@ class CompanySchema extends Component {
 
         return (
             <div data-id={this.props.id} className={[styles.companyContainer, 'companyRow'].join(' ')}>
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between'
-                    }}
-                >
+                <div className={styles.nameCross}>
                     <a
                         className="companyName"
                         data-nse={this.state.companyDetails.nseId}
@@ -106,7 +101,14 @@ class CompanySchema extends Component {
                         {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
                     </span>
                 </div>
-                <div className="companySector">Sector: {this.state.companyDetails.sector}</div>
+                <div className="companySector">
+                    Sector:{' '}
+                    <span>
+                        {`${this.state.companyDetails.sector}`.length > 25
+                            ? `${this.state.companyDetails.sector}`.substr(0, 25) + '...'
+                            : this.state.companyDetails.sector}
+                    </span>
+                </div>
             </div>
         );
     }

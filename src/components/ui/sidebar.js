@@ -39,10 +39,7 @@ class Sidebar extends Component {
                                     checked: <img src={googleLogo} width="11px" alt="Google" />,
                                     unchecked: <img src={bingLogo} width="11px" alt="Bing" />
                                 }}
-                                onChange={() => {
-                                    this.props.changed();
-                                    this.props.saveSearchEngine();
-                                }}
+                                onChange={this.props.changed}
                             />
                         </div>
                         <div className={styles.sortContainer}>

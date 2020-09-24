@@ -9,7 +9,7 @@
 }
 
 .searchBar {
-    width: 100%;
+    width: 92vw;
     justify-content: center;
     display: flex;
     margin-bottom: 10px;
@@ -50,9 +50,19 @@
 
 .indicesContainer {
     display: flex;
-    width: 100%;
+    width: 92vw;
     border-radius: 10px;
     font-size: 85%;
+}
+
+.indicesContainer :first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.indicesContainer :last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {

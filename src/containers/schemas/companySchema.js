@@ -10,7 +10,7 @@ class CompanySchema extends Component {
 
     componentDidMount() {
         this.getLiveData();
-        // setInterval(this.getLiveData, 50000000000);
+        // setInterval(this.getLiveData, 30000);
     }
 
     getLiveData = () => {
@@ -67,7 +67,7 @@ class CompanySchema extends Component {
                             searchEngine +
                             '.com/search?q=' +
                             this.state.companyDetails.companyName +
-                            ' share'
+                            ' stock'
                         ).toLowerCase()}
                     >
                         {`${this.state.companyDetails.companyName}`.length > 25

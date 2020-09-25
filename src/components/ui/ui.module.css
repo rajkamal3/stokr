@@ -99,7 +99,7 @@
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .header {
-        width: 100%;
+        width: 100vw;
         box-sizing: border-box;
         padding: 8px;
     }
@@ -107,7 +107,7 @@
 
 @media only screen and (min-width: 601px) and (max-width: 768px) {
     .header {
-        width: 100%;
+        width: 100vw;
         box-sizing: border-box;
         padding-top: 10px;
         padding-bottom: 10px;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CompanySchema from '../schemas/companySchema';
 import IndicesSchema from '../schemas/indicesSchema';
+import MidSmallIndicesSchema from '../schemas/midsmallIndicesSchema';
 import USIndicesSchema from '../schemas/usIndicesSchema';
 import Header from '../../components/ui/header';
 import Sidebar from '../../components/ui/sidebar';
@@ -200,8 +201,9 @@ class Screener extends Component {
     };
 
     render() {
-        const indices = ['NSX', 'SEN'];
-        const usIndices = ['GSPC', 'IXIC'];
+        const indices = ['SEN'];
+        const midSmallIndices = ['MID', 'SML'];
+        const usIndices = ['GSPC'];
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
@@ -219,7 +221,7 @@ class Screener extends Component {
                     <input
                         onChange={this.filterCompanies.bind(this)}
                         type="textbox"
-                        placeholder="Search for companies..."
+                        placeholder="Search for companies or sectors..."
                         className={[styles.textbox, 'inputValue'].join(' ')}
                     />
                     <button className={styles.addButton} onClick={this.addNewCompany.bind(this)}>
@@ -230,6 +232,9 @@ class Screener extends Component {
                 <div className={styles.indicesContainer}>
                     {indices.map((el) => {
                         return <IndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
+                    })}
+                    {midSmallIndices.map((el) => {
+                        return <MidSmallIndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
                     })}
                     {usIndices.map((el) => {
                         return <USIndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;

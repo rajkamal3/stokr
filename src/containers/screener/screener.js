@@ -217,6 +217,18 @@ class Screener extends Component {
                     postData={this.postData}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
+                {/* <div
+                    className="modal1"
+                    style={{
+                        width: '90%',
+                        height: '30vh',
+                        position: 'absolute',
+                        backgroundColor: 'red',
+                        top: '35%'
+                    }}
+                >
+                    modal
+                </div> */}
                 <div className={[styles.searchBar, 'search'].join(' ')}>
                     <input
                         onChange={this.filterCompanies.bind(this)}
@@ -241,13 +253,48 @@ class Screener extends Component {
                     })}
                 </div>
 
-                <div className="companiesContainer">
-                    {this.state.ids.length >= 1
-                        ? this.state.ids.map((el) => {
-                              return <CompanySchema searchEngine={this.state.searchEngine} clicked={this.removeCompany} key={el} id={el} />;
-                          })
-                        : ''}
-                </div>
+                <select
+                    name="selectList"
+                    id="listOfLists"
+                    style={{
+                        width: '92vw',
+                        height: '45px',
+                        background: 'none',
+                        border: 'none',
+                        backgroundColor: '#17141d',
+                        zIndex: '999',
+                        padding: '0px 15px',
+                        color: 'white'
+                    }}
+                >
+                    <option>My Companies</option>
+                    <option value="">Smallcap</option>
+                    <option value="">Midcap</option>
+                </select>
+
+                {true ? (
+                    <div
+                        // style={{
+                        //     width: '92vw',
+                        //     marginTop: '20px',
+                        //     height: '50vh',
+                        //     backgroundColor: 'red'
+                        // }}
+                        className={[styles.loader, 'loader'].join(' ')}
+                    >
+                        Loading...
+                    </div>
+                ) : (
+                    <div className="companiesContainer">
+                        {this.state.ids.length >= 1
+                            ? this.state.ids.map((el) => {
+                                  return (
+                                      <CompanySchema searchEngine={this.state.searchEngine} clicked={this.removeCompany} key={el} id={el} />
+                                  );
+                              })
+                            : ''}
+                    </div>
+                )}
             </div>
         );
     }

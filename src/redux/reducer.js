@@ -1,9 +1,23 @@
 const initialState = {
-    user: 'none'
+    userId: '',
+    email: '',
+    userName: '',
+    profileImage: ''
 };
 
 const Reducer = (state = initialState, action) => {
-    return state;
+    switch (action.type) {
+        case 'NEXT_USER':
+            return {
+                ...state,
+                userId: action.userId,
+                email: action.email,
+                userName: action.userName,
+                profileImage: action.profileImage
+            };
+        default:
+            return state;
+    }
 };
 
 export default Reducer;

@@ -8,6 +8,7 @@ import Sidebar from '../../components/ui/sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './screener.module.css';
+import { connect } from 'react-redux';
 
 class Screener extends Component {
     state = {
@@ -207,6 +208,7 @@ class Screener extends Component {
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
+                {/* {this.props.userName} */}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -259,4 +261,10 @@ class Screener extends Component {
     }
 }
 
-export default Screener;
+const mapStateToProps = (state) => {
+    return {
+        userName: state.userName
+    };
+};
+
+export default connect(mapStateToProps, null)(Screener);

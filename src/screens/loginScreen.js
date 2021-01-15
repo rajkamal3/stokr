@@ -2,10 +2,18 @@ import React, { Component } from 'react';
 import GoogleLogin from 'react-google-login';
 
 class LoginScreen extends Component {
+    state = {
+        userName: '',
+        email: ''
+    };
+
     responseGoogle = (res) => {
         console.log(res);
-        console.log(res.profile);
-        this.props.history.push('/screener');
+        this.setState({
+            userName: res.profileObj.givenName,
+            email: res.profileObj.email
+        });
+        this.props.history.push(`/screener?huell=${this.state.userName}`);
     };
 
     render() {

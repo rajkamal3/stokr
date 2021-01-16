@@ -14,10 +14,10 @@ const Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isGuest: false,
-                userId: action.userId,
-                email: action.email,
-                userName: action.userName,
-                profileImage: action.profileImage
+                userId: action.payload.userId,
+                email: action.payload.email,
+                userName: action.payload.userName,
+                profileImage: action.payload.profileImage
             };
         case 'GET_USER_DETAILS':
             return {

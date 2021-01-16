@@ -11,7 +11,6 @@ class Sidebar extends Component {
     logout() {
         localStorage.removeItem('userInfo');
         this.props.history.push('/login');
-        // this.props.logout();
     }
 
     render() {

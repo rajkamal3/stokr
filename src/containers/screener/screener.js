@@ -9,7 +9,8 @@ import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
-// import { GoogleLogout } from 'react-google-login';
+
+const userDetails = JSON.parse(localStorage.getItem('userInfo'));
 
 class Screener extends Component {
     state = {
@@ -32,8 +33,9 @@ class Screener extends Component {
             email: this.props.email
         });
 
-        axios.get('https://stokr-beta.firebaseio.com/companies.json').then((res) => {
+        axios.get(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies.json`).then((res) => {
             this.setState({ ids: res.data });
+            console.log(res);
         });
     }
 
@@ -111,7 +113,7 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            axios.put('https://stokr-beta.firebaseio.com/companies/.json', currentIds);
+                            axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, currentIds);
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -132,7 +134,7 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids);
+        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids);
     };
 
     toggleSearchEngine = () => {
@@ -140,7 +142,7 @@ class Screener extends Component {
     };
 
     postData = () => {
-        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
+        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids).then((res) => {
             document.querySelector('.sortSave').innerHTML = 'Saved!';
             setTimeout(() => {
                 document.querySelector('.sortSave').innerHTML = 'Save';
@@ -214,12 +216,6 @@ class Screener extends Component {
         }
     };
 
-    // logout() {
-    //     localStorage.removeItem('userInfo');
-    //     this.props.history.push('/login');
-    //     this.props.logout();
-    // }
-
     render() {
         const indices = ['SEN'];
         const midSmallIndices = ['MID', 'SML'];
@@ -228,16 +224,6 @@ class Screener extends Component {
         return (
             <div className={[styles.container, 'container'].join(' ')}>
                 {this.props.isGuestMode && <div>Hi Guest</div>}
-                {/* {this.props.userName && (
-                    <div>
-                        <p>{this.props.userName}</p>
-                        <GoogleLogout
-                            clientId="29688275580-frp5n08029u8atavt5elo115vmlsn6bh.apps.googleusercontent.com"
-                            buttonText="Logout"
-                            onLogoutSuccess={this.logout.bind(this)}
-                        ></GoogleLogout>
-                    </div>
-                )} */}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -295,14 +281,14 @@ const mapStateToProps = (state) => {
     return {
         userName: state.userName,
         email: state.email,
+        userId: state.userId,
         isGuestMode: state.isGuest
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' }),
-        logout: () => dispatch({ type: 'LOG_OUT' })
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
     };
 };
 

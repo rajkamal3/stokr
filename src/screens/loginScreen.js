@@ -24,6 +24,7 @@ const LoginScreen = ({ history }) => {
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
         console.log(userInfo);
+        console.log(res);
     };
 
     const continueAsGuest = (res) => {
@@ -37,10 +38,6 @@ const LoginScreen = ({ history }) => {
 
         console.log(res);
     };
-
-    // const responseGoogleFail = (res) => {
-    //     history.push(`/notsignedin`);
-    // };
 
     return (
         <div

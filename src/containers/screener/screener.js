@@ -9,7 +9,7 @@ import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
-import { GoogleLogout } from 'react-google-login';
+// import { GoogleLogout } from 'react-google-login';
 
 class Screener extends Component {
     state = {
@@ -214,11 +214,11 @@ class Screener extends Component {
         }
     };
 
-    logout() {
-        localStorage.removeItem('userInfo');
-        this.props.history.push('/login');
-        this.props.logout();
-    }
+    // logout() {
+    //     localStorage.removeItem('userInfo');
+    //     this.props.history.push('/login');
+    //     this.props.logout();
+    // }
 
     render() {
         const indices = ['SEN'];
@@ -228,7 +228,7 @@ class Screener extends Component {
         return (
             <div className={[styles.container, 'container'].join(' ')}>
                 {this.props.isGuestMode && <div>Hi Guest</div>}
-                {this.props.userName && (
+                {/* {this.props.userName && (
                     <div>
                         <p>{this.props.userName}</p>
                         <GoogleLogout
@@ -237,7 +237,7 @@ class Screener extends Component {
                             onLogoutSuccess={this.logout.bind(this)}
                         ></GoogleLogout>
                     </div>
-                )}
+                )} */}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -246,6 +246,7 @@ class Screener extends Component {
                     changed={this.toggleSearchEngine}
                     sorted={this.sort}
                     postData={this.postData}
+                    history={this.props.history}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>

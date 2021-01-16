@@ -5,6 +5,9 @@ const initialState = {
     profileImage: ''
 };
 
+const userDetails = JSON.parse(localStorage.getItem('userInfo'));
+console.log(userDetails);
+
 const Reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN':
@@ -15,6 +18,15 @@ const Reducer = (state = initialState, action) => {
                 email: action.email,
                 userName: action.userName,
                 profileImage: action.profileImage
+            };
+        case 'GET_USER_DETAILS':
+            return {
+                ...state,
+                isGuest: false,
+                userId: userDetails.userId,
+                email: userDetails.email,
+                userName: userDetails.userName,
+                profileImage: userDetails.profileImage
             };
         case 'GUEST_MODE':
             return {

@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 
 class Screener extends Component {
     state = {
+        name: '',
+        email: '',
         ids: [],
         showMenu: false,
         modalActive: false,
@@ -19,6 +21,16 @@ class Screener extends Component {
     };
 
     componentDidMount() {
+        console.log(this.props);
+        if (this.props.userName === '') {
+            this.props.getUserDetails();
+        }
+
+        this.setState({
+            name: this.props.userName,
+            email: this.props.email
+        });
+
         axios.get('https://stokr-beta.firebaseio.com/companies.json').then((res) => {
             this.setState({ ids: res.data });
         });
@@ -208,7 +220,8 @@ class Screener extends Component {
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
-                {/* {this.props.userName} */}
+                {this.props.isGuestMode && <div>Hi Guest</div>}
+                {this.props.userName}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -263,8 +276,16 @@ class Screener extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userName: state.userName
+        userName: state.userName,
+        email: state.email,
+        isGuestMode: state.isGuest
     };
 };
 
-export default connect(mapStateToProps, null)(Screener);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Screener);

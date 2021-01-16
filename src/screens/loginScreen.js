@@ -6,18 +6,24 @@ const LoginScreen = ({ history }) => {
     const dispatch = useDispatch();
 
     const responseGoogle = (res) => {
-        history.push(`/screener`);
-
-        dispatch({
-            type: 'LOGIN',
+        const userInfo = {
             isGuest: false,
             userId: res.profileObj.googleId,
             email: res.profileObj.email,
             userName: res.profileObj.name,
             profileImage: res.profileObj.imageUrl
+        };
+
+        dispatch({
+            type: 'LOGIN',
+            payload: userInfo
         });
 
-        console.log(res);
+        history.push(`/screener`);
+
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+        console.log(userInfo);
     };
 
     const continueAsGuest = (res) => {

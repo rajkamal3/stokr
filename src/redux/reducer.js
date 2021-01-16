@@ -28,6 +28,8 @@ const Reducer = (state = initialState, action) => {
                 userName: userDetails.userName,
                 profileImage: userDetails.profileImage
             };
+        case 'LOG_OUT':
+            return null;
         case 'GUEST_MODE':
             return {
                 ...state,

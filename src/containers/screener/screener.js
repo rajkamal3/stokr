@@ -9,6 +9,7 @@ import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
+import { GoogleLogout } from 'react-google-login';
 
 class Screener extends Component {
     state = {
@@ -213,6 +214,12 @@ class Screener extends Component {
         }
     };
 
+    logout() {
+        localStorage.removeItem('userInfo');
+        this.props.history.push('/login');
+        this.props.logout();
+    }
+
     render() {
         const indices = ['SEN'];
         const midSmallIndices = ['MID', 'SML'];
@@ -221,7 +228,16 @@ class Screener extends Component {
         return (
             <div className={[styles.container, 'container'].join(' ')}>
                 {this.props.isGuestMode && <div>Hi Guest</div>}
-                {this.props.userName}
+                {this.props.userName && (
+                    <div>
+                        <p>{this.props.userName}</p>
+                        <GoogleLogout
+                            clientId="29688275580-frp5n08029u8atavt5elo115vmlsn6bh.apps.googleusercontent.com"
+                            buttonText="Logout"
+                            onLogoutSuccess={this.logout.bind(this)}
+                        ></GoogleLogout>
+                    </div>
+                )}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -284,7 +300,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' }),
+        logout: () => dispatch({ type: 'LOG_OUT' })
     };
 };
 

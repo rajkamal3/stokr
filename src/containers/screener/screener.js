@@ -10,7 +10,7 @@ import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
 
-const userDetails = JSON.parse(localStorage.getItem('userInfo'));
+// const userDetails = JSON.parse(localStorage.getItem('userInfo'));
 
 class Screener extends Component {
     state = {

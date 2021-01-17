@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import CompanySchema from '../schemas/companySchema';
+import CompanySchema from '../schemas/companySchema';
 import IndicesSchema from '../schemas/indicesSchema';
 import MidSmallIndicesSchema from '../schemas/midsmallIndicesSchema';
 import USIndicesSchema from '../schemas/usIndicesSchema';
@@ -268,7 +268,7 @@ class Screener extends Component {
                     })}
                 </div>
 
-                {/* {this.state.ids.length >= 1 ? (
+                {this.state.ids ? (
                     <div className="companiesContainer">
                         {this.state.ids.length >= 1
                             ? this.state.ids.map((el) => {
@@ -280,7 +280,7 @@ class Screener extends Component {
                     </div>
                 ) : (
                     <div>Please add companies</div>
-                )} */}
+                )}
             </div>
         );
     }

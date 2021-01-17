@@ -270,7 +270,7 @@ class Screener extends Component {
 
                 {/* {this.state.ids.length >= 1 && ( */}
                 <div className="companiesContainer">
-                    {this.state.ids.length >= 1
+                    {this.state.ids
                         ? this.state.ids.map((el) => {
                               return <CompanySchema searchEngine={this.state.searchEngine} clicked={this.removeCompany} key={el} id={el} />;
                           })

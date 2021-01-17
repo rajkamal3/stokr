@@ -20,7 +20,11 @@ const LoginScreen = ({ history }) => {
             payload: userInfo
         });
 
-        axios.put(`https://stokr-beta.firebaseio.com/${res.profileObj.googleId}/companies/.json`, ['RI']);
+        axios.get(`https://stokr-beta.firebaseio.com/${res.profileObj.googleId}/companies/.json`).then((res) => {
+            if (res.data === null) {
+                axios.put(`https://stokr-beta.firebaseio.com/${userInfo.userId}/companies/.json`, ['RI']);
+            }
+        });
 
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 

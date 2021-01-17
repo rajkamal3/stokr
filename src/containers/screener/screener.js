@@ -120,7 +120,7 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, currentIds);
+                            axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, currentIds);
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -141,7 +141,7 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids);
+        axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, this.state.ids);
     };
 
     toggleSearchEngine = () => {
@@ -149,7 +149,7 @@ class Screener extends Component {
     };
 
     postData = () => {
-        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids).then((res) => {
+        axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, this.state.ids).then((res) => {
             document.querySelector('.sortSave').innerHTML = 'Saved!';
             setTimeout(() => {
                 document.querySelector('.sortSave').innerHTML = 'Save';

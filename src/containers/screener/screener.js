@@ -266,7 +266,7 @@ class Screener extends Component {
                     })}
                 </div>
 
-                {this.state.ids.length > 0 && (
+                {this.state.ids.length >= 1 && (
                     <div className="companiesContainer">
                         {this.state.ids.length >= 1
                             ? this.state.ids.map((el) => {

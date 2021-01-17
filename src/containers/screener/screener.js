@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CompanySchema from '../schemas/companySchema';
+// import CompanySchema from '../schemas/companySchema';
 import IndicesSchema from '../schemas/indicesSchema';
 import MidSmallIndicesSchema from '../schemas/midsmallIndicesSchema';
 import USIndicesSchema from '../schemas/usIndicesSchema';

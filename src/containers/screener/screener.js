@@ -228,6 +228,8 @@ class Screener extends Component {
         const midSmallIndices = ['MID', 'SML'];
         const usIndices = ['GSPC'];
 
+        console.log(this.state.ids);
+
         return (
             <div className={[styles.container, 'container'].join(' ')}>
                 {this.props.isGuestMode && <div>Hi Guest</div>}
@@ -279,7 +281,6 @@ class Screener extends Component {
                 ) : (
                     <div>Please add companies</div>
                 )} */}
-                {() => console.log(this.state.ids)}
             </div>
         );
     }

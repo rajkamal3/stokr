@@ -10,7 +10,7 @@ import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
 
-// const userDetails = JSON.parse(localStorage.getItem('userInfo'));
+const userDetails = JSON.parse(localStorage.getItem('userInfo'));
 
 class Screener extends Component {
     state = {
@@ -35,7 +35,7 @@ class Screener extends Component {
 
         console.log(this.state.name);
 
-        axios.get(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies.json`).then((res) => {
+        axios.get(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies.json`).then((res) => {
             this.setState({ ids: res.data });
             console.log(res);
         });
@@ -120,7 +120,7 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, currentIds);
+                            axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, currentIds);
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -141,7 +141,7 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, this.state.ids);
+        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids);
     };
 
     toggleSearchEngine = () => {
@@ -149,7 +149,7 @@ class Screener extends Component {
     };
 
     postData = () => {
-        axios.put(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies/.json`, this.state.ids).then((res) => {
+        axios.put(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies/.json`, this.state.ids).then((res) => {
             document.querySelector('.sortSave').innerHTML = 'Saved!';
             setTimeout(() => {
                 document.querySelector('.sortSave').innerHTML = 'Save';
@@ -229,6 +229,10 @@ class Screener extends Component {
         const usIndices = ['GSPC'];
 
         console.log(this.state.ids);
+
+        if (!userDetails) {
+            return null;
+        }
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>

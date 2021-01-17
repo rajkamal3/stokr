@@ -19,9 +19,9 @@ const LoginScreen = ({ history }) => {
             payload: userInfo
         });
 
-        history.push(`/screener`);
-
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+        history.push(`/screener`);
 
         console.log(userInfo);
         console.log(res);

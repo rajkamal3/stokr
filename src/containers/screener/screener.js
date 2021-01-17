@@ -33,7 +33,9 @@ class Screener extends Component {
             email: this.props.email
         });
 
-        axios.get(`https://stokr-beta.firebaseio.com/${userDetails.userId}/companies.json`).then((res) => {
+        console.log(this.state.name);
+
+        axios.get(`https://stokr-beta.firebaseio.com/${this.props.userId}/companies.json`).then((res) => {
             this.setState({ ids: res.data });
             console.log(res);
         });
@@ -101,7 +103,12 @@ class Screener extends Component {
                                 return;
                             }
                             var compCode = parsed.querySelector('#scid').attributes.value;
-                            const currentIds = this.state.ids;
+                            let currentIds;
+                            if (!this.state.ids) {
+                                return;
+                            } else {
+                                currentIds = this.state.ids;
+                            }
 
                             if (!currentIds.includes(compCode)) {
                                 currentIds.unshift(compCode);
@@ -259,9 +266,7 @@ class Screener extends Component {
                     })}
                 </div>
 
-                {false ? (
-                    <div className={[styles.loader, 'loader'].join(' ')}>Loading...</div>
-                ) : (
+                {this.state.ids.length > 0 && (
                     <div className="companiesContainer">
                         {this.state.ids.length >= 1
                             ? this.state.ids.map((el) => {

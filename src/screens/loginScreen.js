@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const LoginScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -18,6 +19,8 @@ const LoginScreen = ({ history }) => {
             type: 'LOGIN',
             payload: userInfo
         });
+
+        axios.post(`https://stokr-beta.firebaseio.com/${res.profileObj.googleId}/companies/.json`, ['RI']);
 
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 

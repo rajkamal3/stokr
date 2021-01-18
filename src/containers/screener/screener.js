@@ -224,15 +224,11 @@ class Screener extends Component {
     };
 
     render() {
-        const indices = ['SEN'];
-        const midSmallIndices = ['MID', 'SML'];
+        const indices = ['NSX', 'ccx'];
+        const midSmallIndices = ['SML'];
         const usIndices = ['GSPC'];
 
         console.log(this.state.ids);
-
-        // if (!userDetails) {
-        //     return null;
-        // }
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
@@ -272,7 +268,6 @@ class Screener extends Component {
                     })}
                 </div>
 
-                {/* {this.state.ids.length >= 1 && ( */}
                 <div className="companiesContainer">
                     {this.state.ids
                         ? this.state.ids.map((el) => {
@@ -280,7 +275,6 @@ class Screener extends Component {
                           })
                         : ''}
                 </div>
-                {/* )} */}
             </div>
         );
     }

@@ -9,11 +9,11 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className={styles.holder}>
-                    <Route exact path="/">
-                        {true ? <Redirect to="/login" /> : ''}
-                    </Route>
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/screener" component={Screener} />
+                    <Route exact path="/">
+                        <Redirect to="/login" />
+                    </Route>
                 </div>
             </BrowserRouter>
         );

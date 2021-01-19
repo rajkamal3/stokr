@@ -142,6 +142,11 @@ class Screener extends Component {
 
     hideMenu = () => {
         this.setState({ showMenu: !this.state.showMenu });
+        if (this.state.showMenu) {
+            document.body.style.overflow = '';
+        } else {
+            document.body.style.overflow = 'hidden';
+        }
     };
 
     removeCompany = (comp) => {

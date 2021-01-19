@@ -5,7 +5,7 @@ const initialState = {
     profileImage: ''
 };
 
-const userDetails = JSON.parse(localStorage.getItem('userInfo'));
+const userDetails = JSON.parse(localStorage.getItem('userInfo')).userId;
 console.log(userDetails);
 
 const Reducer = (state = initialState, action) => {
@@ -23,10 +23,10 @@ const Reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isGuest: false,
-                userId: userDetails.userId,
-                email: userDetails.email,
-                userName: userDetails.userName,
-                profileImage: userDetails.profileImage
+                userId: JSON.parse(localStorage.getItem('userInfo')).userId,
+                email: JSON.parse(localStorage.getItem('userInfo')).email,
+                userName: JSON.parse(localStorage.getItem('userInfo')).userName,
+                profileImage: JSON.parse(localStorage.getItem('userInfo')).profileImage
             };
         case 'LOG_OUT':
             return null;

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import styles from './ui.module.css';
 import hamburger from './../../assets/images/hamburger.png';
 import logo from './../../assets/images/logo.png';
-// import extras from './../../assets/images/extras.png';
 
 const Header = (props) => {
     const [dp, setDp] = useState('');

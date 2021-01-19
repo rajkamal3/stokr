@@ -45,7 +45,7 @@ class MidSmallIndicesSchema extends Component {
                         this.props.id === 'MID' ? 'Nifty%20Midcap%20100' : 'Nifty%20Smallcap%20100'
                     }`.toLowerCase()}
                 >
-                    {this.props.id === 'MID' ? 'Midcap 100' : 'Smallcap 100'}&nbsp;
+                    {this.props.id === 'MID' ? 'Midcap 100' : 'NIFTY Smallcap 100'}&nbsp;
                     {this.state.indices.value}
                     <br />
                     {this.state.indices.change}&nbsp;{this.state.indices.pChange}%

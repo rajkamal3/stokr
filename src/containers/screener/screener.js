@@ -8,9 +8,12 @@ import Sidebar from '../../components/ui/sidebar';
 import axios from 'axios';
 import parse from 'node-html-parser';
 import styles from './screener.module.css';
+import { connect } from 'react-redux';
 
 class Screener extends Component {
     state = {
+        name: '',
+        email: '',
         ids: [],
         showMenu: false,
         modalActive: false,
@@ -18,9 +21,28 @@ class Screener extends Component {
     };
 
     componentDidMount() {
-        axios.get('https://stokr-beta.firebaseio.com/companies.json').then((res) => {
-            this.setState({ ids: res.data });
+        if (this.props.userName === '') {
+            this.props.getUserDetails();
+        }
+
+        this.setState({
+            userId: this.props.userId,
+            name: this.props.userName,
+            email: this.props.email
         });
+
+        console.log(this.state.name);
+
+        axios
+            .get(
+                `https://stokr-beta.firebaseio.com/${
+                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                }/companies.json`
+            )
+            .then((res) => {
+                this.setState({ ids: res.data });
+                console.log(res);
+            });
     }
 
     filterCompanies = () => {
@@ -85,7 +107,12 @@ class Screener extends Component {
                                 return;
                             }
                             var compCode = parsed.querySelector('#scid').attributes.value;
-                            const currentIds = this.state.ids;
+                            let currentIds;
+                            if (!this.state.ids) {
+                                return;
+                            } else {
+                                currentIds = this.state.ids;
+                            }
 
                             if (!currentIds.includes(compCode)) {
                                 currentIds.unshift(compCode);
@@ -97,7 +124,12 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            axios.put('https://stokr-beta.firebaseio.com/companies/.json', currentIds);
+                            axios.put(
+                                `https://stokr-beta.firebaseio.com/${
+                                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                                }/companies/.json`,
+                                currentIds
+                            );
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -118,7 +150,12 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids);
+        axios.put(
+            `https://stokr-beta.firebaseio.com/${
+                this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+            }/companies/.json`,
+            this.state.ids
+        );
     };
 
     toggleSearchEngine = () => {
@@ -126,12 +163,19 @@ class Screener extends Component {
     };
 
     postData = () => {
-        axios.put('https://stokr-beta.firebaseio.com/companies/.json', this.state.ids).then((res) => {
-            document.querySelector('.sortSave').innerHTML = 'Saved!';
-            setTimeout(() => {
-                document.querySelector('.sortSave').innerHTML = 'Save';
-            }, 3000);
-        });
+        axios
+            .put(
+                `https://stokr-beta.firebaseio.com/${
+                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                }/companies/.json`,
+                this.state.ids
+            )
+            .then((res) => {
+                document.querySelector('.sortSave').innerHTML = 'Saved!';
+                setTimeout(() => {
+                    document.querySelector('.sortSave').innerHTML = 'Save';
+                }, 3000);
+            });
     };
 
     createArrayForSorting = (cos, sortArr, by) => {
@@ -201,12 +245,15 @@ class Screener extends Component {
     };
 
     render() {
-        const indices = ['SEN'];
-        const midSmallIndices = ['MID', 'SML'];
+        const indices = ['NSX', 'ccx'];
+        const midSmallIndices = ['SML'];
         const usIndices = ['GSPC'];
+
+        console.log(this.state.ids);
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
+                {this.props.isGuestMode && <div>Hi Guest</div>}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -215,6 +262,7 @@ class Screener extends Component {
                     changed={this.toggleSearchEngine}
                     sorted={this.sort}
                     postData={this.postData}
+                    history={this.props.history}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
                 <div className={[styles.searchBar, 'search'].join(' ')}>
@@ -242,7 +290,7 @@ class Screener extends Component {
                 </div>
 
                 <div className="companiesContainer">
-                    {this.state.ids.length >= 1
+                    {this.state.ids
                         ? this.state.ids.map((el) => {
                               return <CompanySchema searchEngine={this.state.searchEngine} clicked={this.removeCompany} key={el} id={el} />;
                           })
@@ -253,4 +301,19 @@ class Screener extends Component {
     }
 }
 
-export default Screener;
+const mapStateToProps = (state) => {
+    return {
+        userName: state.userName,
+        email: state.email,
+        userId: state.userId,
+        isGuestMode: state.isGuest
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Screener);

@@ -4,8 +4,15 @@ import Toggle from 'react-toggle';
 import './../../assets/libraries/toggleStyles.css';
 import googleLogo from './../../assets/images/g.png';
 import bingLogo from './../../assets/images/b.png';
+import { GoogleLogout } from 'react-google-login';
+import { connect } from 'react-redux';
 
 class Sidebar extends Component {
+    logout() {
+        localStorage.removeItem('userInfo');
+        this.props.history.push('/login');
+    }
+
     render() {
         let showSideMenu;
         let modalActive;
@@ -25,6 +32,13 @@ class Sidebar extends Component {
                 <div className={modalActive} onClick={this.props.clicked}></div>
                 <div className={showSideMenu}>
                     <div className={styles.sidebar}>
+                        <div
+                            style={{
+                                marginBottom: '20px'
+                            }}
+                        >
+                            Hi {this.props.userName && <span>{this.props.userName.split(' ')[0]}</span>}
+                        </div>
                         <div
                             className="searchEngine"
                             style={{
@@ -100,6 +114,19 @@ class Sidebar extends Component {
                                 </div>
                             </div>
                         </div>
+                        {this.props.userName && (
+                            <div
+                                style={{
+                                    marginTop: '20px'
+                                }}
+                            >
+                                <GoogleLogout
+                                    clientId="29688275580-frp5n08029u8atavt5elo115vmlsn6bh.apps.googleusercontent.com"
+                                    buttonText="Logout"
+                                    onLogoutSuccess={this.logout.bind(this)}
+                                ></GoogleLogout>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -107,4 +134,12 @@ class Sidebar extends Component {
     }
 }
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+    return {
+        userName: state.userName,
+        email: state.email,
+        isGuestMode: state.isGuest
+    };
+};
+
+export default connect(mapStateToProps, null)(Sidebar);

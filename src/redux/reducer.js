@@ -32,7 +32,6 @@ const Reducer = (state = initialState, action) => {
             return null;
         case 'GUEST_MODE':
             return {
-                ...state,
                 isGuest: true
             };
         default:

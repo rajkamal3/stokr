@@ -21,28 +21,34 @@ class Screener extends Component {
     };
 
     componentDidMount() {
-        if (this.props.userName === '') {
-            this.props.getUserDetails();
-        }
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            // localStorage.setItem('companies', ['RI', 'AS28']);
 
-        this.setState({
-            userId: this.props.userId,
-            name: this.props.userName,
-            email: this.props.email
-        });
-
-        console.log(this.state.name);
-
-        axios
-            .get(
-                `https://stokr-beta.firebaseio.com/${
-                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-                }/companies.json`
-            )
-            .then((res) => {
-                this.setState({ ids: res.data });
-                console.log(res);
+            this.setState({
+                ids: localStorage.getItem('companies').split(',')
             });
+        } else {
+            if (this.props.userName === '') {
+                this.props.getUserDetails();
+            }
+
+            this.setState({
+                userId: this.props.userId,
+                name: this.props.userName,
+                email: this.props.email
+            });
+
+            axios
+                .get(
+                    `https://stokr-beta.firebaseio.com/${
+                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                    }/companies.json`
+                )
+                .then((res) => {
+                    this.setState({ ids: res.data });
+                    console.log(res);
+                });
+        }
     }
 
     filterCompanies = () => {
@@ -317,7 +323,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' }),
+        getGuest: () => dispatch({ type: 'GUEST_MODE' })
     };
 };
 

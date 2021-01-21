@@ -13,6 +13,12 @@ class Sidebar extends Component {
         this.props.history.push('/login');
     }
 
+    redirectToLogin() {
+        this.props.history.location.pathname = '/';
+        this.props.history.push('/login');
+        console.log(this.props);
+    }
+
     render() {
         let showSideMenu;
         let modalActive;
@@ -37,7 +43,7 @@ class Sidebar extends Component {
                                 marginBottom: '20px'
                             }}
                         >
-                            Hi {this.props.userName && <span>{this.props.userName.split(' ')[0]}</span>}
+                            Hi {this.props.userName ? <span>{this.props.userName.split(' ')[0]}</span> : <span>Guest</span>}
                         </div>
                         <div
                             className="searchEngine"
@@ -114,7 +120,7 @@ class Sidebar extends Component {
                                 </div>
                             </div>
                         </div>
-                        {this.props.userName && (
+                        {this.props.userName ? (
                             <div
                                 style={{
                                     marginTop: '20px'
@@ -126,6 +132,21 @@ class Sidebar extends Component {
                                     onLogoutSuccess={this.logout.bind(this)}
                                 ></GoogleLogout>
                             </div>
+                        ) : (
+                            <button
+                                style={{
+                                    marginTop: '20px',
+                                    width: '100px',
+                                    height: '30px',
+                                    background: 'none',
+                                    border: 'none',
+                                    backgroundColor: 'white',
+                                    borderRadius: '5px'
+                                }}
+                                onClick={this.redirectToLogin.bind(this)}
+                            >
+                                Login
+                            </button>
                         )}
                     </div>
                 </div>

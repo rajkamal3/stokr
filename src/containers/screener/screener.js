@@ -10,6 +10,9 @@ import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
 
+document.body.style.overflow = '';
+let tempCompanies = ['RI', 'TCS', 'IT'];
+
 class Screener extends Component {
     state = {
         name: '',
@@ -22,7 +25,7 @@ class Screener extends Component {
 
     componentDidMount() {
         if (this.props.history.location.pathname.split('/')[2] === 'guest') {
-            // localStorage.setItem('companies', ['RI', 'AS28']);
+            localStorage.setItem('companies', tempCompanies);
 
             this.setState({
                 ids: localStorage.getItem('companies').split(',')
@@ -156,17 +159,34 @@ class Screener extends Component {
     };
 
     removeCompany = (comp) => {
-        const currentCompanies = this.state.ids;
-        const removeCompany = comp.target.getAttribute('data-id');
-        const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
-        currentCompanies.splice(removeCompanyIndex, 1);
-        this.setState({ ids: currentCompanies });
-        axios.put(
-            `https://stokr-beta.firebaseio.com/${
-                this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-            }/companies/.json`,
-            this.state.ids
-        );
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            const currentCompanies = this.state.ids;
+            const removeCompany = comp.target.getAttribute('data-id');
+            const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
+            currentCompanies.splice(removeCompanyIndex, 1);
+            this.setState({ ids: currentCompanies });
+            tempCompanies = null;
+            localStorage.removeItem('companies');
+            localStorage.setItem('companies', currentCompanies);
+            // localStorage.setItem('companies', tempCompanies);
+
+            // this.setState({
+            //     ids: localStorage.getItem('companies').split(',')
+            // });
+            console.log('huell of the world');
+        } else {
+            const currentCompanies = this.state.ids;
+            const removeCompany = comp.target.getAttribute('data-id');
+            const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
+            currentCompanies.splice(removeCompanyIndex, 1);
+            this.setState({ ids: currentCompanies });
+            axios.put(
+                `https://stokr-beta.firebaseio.com/${
+                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                }/companies/.json`,
+                this.state.ids
+            );
+        }
     };
 
     toggleSearchEngine = () => {
@@ -264,7 +284,6 @@ class Screener extends Component {
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
-                {this.props.isGuestMode && <div>Hi Guest</div>}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}

@@ -52,6 +52,7 @@ class Screener extends Component {
                     console.log(res);
                 });
         }
+        document.body.style.overflow = 'auto';
     }
 
     filterCompanies = () => {

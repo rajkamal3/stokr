@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './ui.module.css';
 import hamburger from './../../assets/images/hamburger.png';
 import logo from './../../assets/images/logo.png';
+import guest from './../../assets/images/guest.png';
 
 const Header = (props) => {
     const [dp, setDp] = useState('');
@@ -23,7 +24,7 @@ const Header = (props) => {
             </div>
             <div className={[styles.hamburgerMenu, 'extras'].join(' ')}>
                 <img
-                    src={dp}
+                    src={dp ? dp : guest}
                     width="25px"
                     alt="Menu"
                     style={{

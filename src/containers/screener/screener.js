@@ -21,28 +21,39 @@ class Screener extends Component {
     };
 
     componentDidMount() {
-        if (this.props.userName === '') {
-            this.props.getUserDetails();
-        }
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            let companies = localStorage.getItem('companies');
 
-        this.setState({
-            userId: this.props.userId,
-            name: this.props.userName,
-            email: this.props.email
-        });
+            if (!companies) {
+                localStorage.setItem('companies', ['RI']);
+            }
 
-        console.log(this.state.name);
-
-        axios
-            .get(
-                `https://stokr-beta.firebaseio.com/${
-                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-                }/companies.json`
-            )
-            .then((res) => {
-                this.setState({ ids: res.data });
-                console.log(res);
+            this.setState({
+                ids: localStorage.getItem('companies').split(',')
             });
+        } else {
+            if (this.props.userName === '') {
+                this.props.getUserDetails();
+            }
+
+            this.setState({
+                userId: this.props.userId,
+                name: this.props.userName,
+                email: this.props.email
+            });
+
+            axios
+                .get(
+                    `https://stokr-beta.firebaseio.com/${
+                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                    }/companies.json`
+                )
+                .then((res) => {
+                    this.setState({ ids: res.data });
+                    console.log(res);
+                });
+        }
+        document.body.style.overflow = 'auto';
     }
 
     filterCompanies = () => {
@@ -124,12 +135,16 @@ class Screener extends Component {
                             }
 
                             this.setState({ ids: currentIds });
-                            axios.put(
-                                `https://stokr-beta.firebaseio.com/${
-                                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-                                }/companies/.json`,
-                                currentIds
-                            );
+                            if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+                                localStorage.setItem('companies', currentIds);
+                            } else {
+                                axios.put(
+                                    `https://stokr-beta.firebaseio.com/${
+                                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                                    }/companies/.json`,
+                                    currentIds
+                                );
+                            }
                         });
                     document.querySelector('.inputValue').value = 'Added';
                     this.showAllCompanies();
@@ -155,12 +170,18 @@ class Screener extends Component {
         const removeCompanyIndex = currentCompanies.indexOf(removeCompany);
         currentCompanies.splice(removeCompanyIndex, 1);
         this.setState({ ids: currentCompanies });
-        axios.put(
-            `https://stokr-beta.firebaseio.com/${
-                this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-            }/companies/.json`,
-            this.state.ids
-        );
+
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            localStorage.removeItem('companies');
+            localStorage.setItem('companies', currentCompanies);
+        } else {
+            axios.put(
+                `https://stokr-beta.firebaseio.com/${
+                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                }/companies/.json`,
+                this.state.ids
+            );
+        }
     };
 
     toggleSearchEngine = () => {
@@ -258,7 +279,6 @@ class Screener extends Component {
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
-                {this.props.isGuestMode && <div>Hi Guest</div>}
                 <Sidebar
                     searchEngine={this.state.searchEngine}
                     showMenu={this.state.showMenu}
@@ -317,7 +337,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' })
+        getUserDetails: () => dispatch({ type: 'GET_USER_DETAILS' }),
+        getGuest: () => dispatch({ type: 'GUEST_MODE' })
     };
 };
 

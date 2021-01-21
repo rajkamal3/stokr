@@ -36,12 +36,15 @@ const LoginScreen = ({ history }) => {
 
     const continueAsGuest = (res) => {
         console.log('continue as guest');
-        history.push(`/screener`);
 
         dispatch({
             type: 'GUEST_MODE',
             isGuest: true
         });
+
+        // localStorage.setItem()
+
+        history.push(`/screener/guest`);
 
         console.log(res);
     };

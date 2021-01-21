@@ -145,7 +145,7 @@ class Sidebar extends Component {
                                 }}
                                 onClick={this.redirectToLogin.bind(this)}
                             >
-                                Login
+                                Log In
                             </button>
                         )}
                     </div>

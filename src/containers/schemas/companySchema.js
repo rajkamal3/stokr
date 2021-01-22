@@ -78,22 +78,39 @@ class CompanySchema extends Component {
                         <img data-id={this.props.id} onClick={this.props.clicked} src={cross} width="20px" alt="Delete" />
                     </div>
                 </div>
-                <div>
-                    Share Price: <span className="sharePrice">{this.state.companyDetails.sharePrice}</span>
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>Share Price: </span>
+                    <span className="sharePrice">{this.state.companyDetails.sharePrice}</span>
                 </div>
-                <div>52 Week Low: {this.state.companyDetails.oneYearLow}</div>
-                <div>52 Week High: {this.state.companyDetails.oneYearHigh}</div>
-                <div>
-                    Market Cap: <span className="marketCap">{this.state.companyDetails.marketCap}</span>
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>52 Week Low: </span>
+                    <span>{this.state.companyDetails.oneYearLow}</span>
                 </div>
-                <div>
-                    PE Ratio: <span className="peRatio">{this.state.companyDetails.peRatio}</span>
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>52 Week High: </span>
+                    <span>{this.state.companyDetails.oneYearHigh}</span>
                 </div>
-                <div>
-                    Industry PE: <span className="industryPe">{this.state.companyDetails.industryPe}</span>
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>Market Cap: </span>
+                    <span className="marketCap">{this.state.companyDetails.marketCap}</span>
                 </div>
-                <div className={['dayChange', 'dummy'].join(' ')}>
-                    Day's Change:{' '}
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>PE Ratio: </span>
+                    <span className="peRatio">{this.state.companyDetails.peRatio}</span>
+                </div>
+
+                <div className={styles.companyDetailsGrid}>
+                    <span className={styles.fontWeight600}>Industry PE: </span>
+                    <span className="industryPe">{this.state.companyDetails.industryPe}</span>
+                </div>
+
+                <div className={['dayChange', 'dummy', styles.companyDetailsGrid].join(' ')}>
+                    <span className={styles.fontWeight600}>Day's Change: </span>
                     <span
                         style={this.state.companyDetails.dayChange * 1 < 0 ? { color: '#EF5350' } : { color: '#9CCC65' }}
                         className="change"
@@ -101,8 +118,9 @@ class CompanySchema extends Component {
                         {(this.state.companyDetails.dayChange * 1).toFixed(2)}%
                     </span>
                 </div>
-                <div className="companySector">
-                    Sector:{' '}
+
+                <div className={['companySector', styles.companyDetailsGrid].join(' ')}>
+                    <span className={styles.fontWeight600}>Sector: </span>
                     <span>
                         {`${this.state.companyDetails.sector}`.length > 25
                             ? `${this.state.companyDetails.sector}`.substr(0, 25) + '...'

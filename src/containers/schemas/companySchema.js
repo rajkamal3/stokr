@@ -96,9 +96,7 @@ class CompanySchema extends Component {
 
                 <div className={styles.companyDetailsGrid}>
                     <span className={styles.fontWeight600}>Market Cap: </span>
-                    <span>
-                        <span className="marketCap">{this.state.companyDetails.marketCap}</span> Crores
-                    </span>
+                    <span className="marketCap">{this.state.companyDetails.marketCap}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>

@@ -189,19 +189,27 @@ class Screener extends Component {
     };
 
     postData = () => {
-        axios
-            .put(
-                `https://stokr-beta.firebaseio.com/${
-                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-                }/companies/.json`,
-                this.state.ids
-            )
-            .then((res) => {
-                document.querySelector('.sortSave').innerHTML = 'Saved!';
-                setTimeout(() => {
-                    document.querySelector('.sortSave').innerHTML = 'Save';
-                }, 3000);
-            });
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            localStorage.setItem('companies', this.state.ids);
+            document.querySelector('.sortSave').innerHTML = 'Saved!';
+            setTimeout(() => {
+                document.querySelector('.sortSave').innerHTML = 'Save';
+            }, 3000);
+        } else {
+            axios
+                .put(
+                    `https://stokr-beta.firebaseio.com/${
+                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                    }/companies/.json`,
+                    this.state.ids
+                )
+                .then((res) => {
+                    document.querySelector('.sortSave').innerHTML = 'Saved!';
+                    setTimeout(() => {
+                        document.querySelector('.sortSave').innerHTML = 'Save';
+                    }, 3000);
+                });
+        }
     };
 
     createArrayForSorting = (cos, sortArr, by) => {

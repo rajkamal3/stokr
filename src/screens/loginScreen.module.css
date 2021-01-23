@@ -1,0 +1,12 @@
+.loginElementsContainer {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    align-self: center;
+}
+
+.continueAsGuest {
+    margin-top: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}

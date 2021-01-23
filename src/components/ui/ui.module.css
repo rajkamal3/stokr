@@ -8,7 +8,7 @@
     justify-content: space-between;
 }
 
-.hamburgerMenu {
+.hamburgerAndDp {
     width: 10%;
     z-index: 999;
     display: flex;
@@ -94,6 +94,33 @@
     border-radius: 50px;
     font-size: 85%;
     cursor: pointer;
+}
+
+.dp {
+    border-radius: 300px;
+}
+
+.hiUser {
+    margin-bottom: 20px;
+}
+
+.searchEngine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout {
+    margin-top: 20px;
+}
+
+.toLogin {
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    background: none;
+    border: none;
+    background-color: white;
+    border-radius: 5px;
 }
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {

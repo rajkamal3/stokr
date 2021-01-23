@@ -16,7 +16,6 @@ class Sidebar extends Component {
     redirectToLogin() {
         this.props.history.location.pathname = '/';
         this.props.history.push('/login');
-        console.log(this.props);
     }
 
     render() {
@@ -38,20 +37,10 @@ class Sidebar extends Component {
                 <div className={modalActive} onClick={this.props.clicked}></div>
                 <div className={showSideMenu}>
                     <div className={styles.sidebar}>
-                        <div
-                            style={{
-                                marginBottom: '20px'
-                            }}
-                        >
+                        <div className={styles.hiUser}>
                             Hi {this.props.userName ? <span>{this.props.userName.split(' ')[0]}</span> : <span>Guest</span>}
                         </div>
-                        <div
-                            className="searchEngine"
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                            }}
-                        >
+                        <div className={[styles.searchEngine, 'searchEngine'].join(' ')}>
                             <span>Search engine</span>
                             <Toggle
                                 defaultChecked={this.props.searchEngine}
@@ -121,11 +110,7 @@ class Sidebar extends Component {
                             </div>
                         </div>
                         {this.props.userName ? (
-                            <div
-                                style={{
-                                    marginTop: '20px'
-                                }}
-                            >
+                            <div className={styles.logout}>
                                 <GoogleLogout
                                     clientId="29688275580-frp5n08029u8atavt5elo115vmlsn6bh.apps.googleusercontent.com"
                                     buttonText="Logout"
@@ -133,18 +118,7 @@ class Sidebar extends Component {
                                 ></GoogleLogout>
                             </div>
                         ) : (
-                            <button
-                                style={{
-                                    marginTop: '20px',
-                                    width: '100px',
-                                    height: '30px',
-                                    background: 'none',
-                                    border: 'none',
-                                    backgroundColor: 'white',
-                                    borderRadius: '5px'
-                                }}
-                                onClick={this.redirectToLogin.bind(this)}
-                            >
+                            <button className={styles.toLogin} onClick={this.redirectToLogin.bind(this)}>
                                 Log In
                             </button>
                         )}

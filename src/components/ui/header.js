@@ -16,21 +16,14 @@ const Header = (props) => {
 
     return (
         <div className={styles.header}>
-            <div onClick={props.clicked} className={[styles.hamburgerMenu, 'burger'].join(' ')}>
-                <img src={hamburger} width="25px" alt="Menu" />
+            <div onClick={props.clicked} className={[styles.hamburgerAndDp, 'burger'].join(' ')}>
+                <img src={hamburger} width="25px" alt="menu" />
             </div>
             <div className="logo">
                 <img src={logo} width="75px" alt="Logo" />
             </div>
-            <div className={[styles.hamburgerMenu, 'extras'].join(' ')}>
-                <img
-                    src={dp ? dp : guest}
-                    width="25px"
-                    alt="Menu"
-                    style={{
-                        borderRadius: '300px'
-                    }}
-                />
+            <div className={[styles.hamburgerAndDp, 'dp'].join(' ')}>
+                <img src={dp ? dp : guest} width="25px" alt="guest" className={styles.dp} />
             </div>
         </div>
     );

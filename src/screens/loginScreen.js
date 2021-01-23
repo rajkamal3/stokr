@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import styles from './loginScreen.module.css';
 
 const LoginScreen = ({ history }) => {
     const dispatch = useDispatch();
@@ -29,35 +30,19 @@ const LoginScreen = ({ history }) => {
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
 
         history.push(`/screener`);
-
-        console.log(userInfo);
-        console.log(res);
     };
 
     const continueAsGuest = (res) => {
-        console.log('continue as guest');
-
         dispatch({
             type: 'GUEST_MODE',
             isGuest: true
         });
 
-        // localStorage.setItem()
-
         history.push(`/screener/guest`);
-
-        console.log(res);
     };
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexFlow: 'column',
-                alignItems: 'center',
-                alignSelf: 'center'
-            }}
-        >
+        <div className={styles.loginElementsContainer}>
             <GoogleLogin
                 clientId="29688275580-frp5n08029u8atavt5elo115vmlsn6bh.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
@@ -66,13 +51,7 @@ const LoginScreen = ({ history }) => {
                 cookiePolicy={'single_host_origin'}
                 isSignedIn={true}
             />
-            <div
-                onClick={continueAsGuest}
-                style={{
-                    marginTop: '10px',
-                    textDecoration: 'underline'
-                }}
-            >
+            <div onClick={continueAsGuest} className={styles.continueAsGuest}>
                 Continue as a Guest
             </div>
         </div>

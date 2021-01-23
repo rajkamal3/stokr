@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const userDetails = JSON.parse(localStorage.getItem('userInfo'));
-console.log(userDetails);
 
 const Reducer = (state = initialState, action) => {
     switch (action.type) {

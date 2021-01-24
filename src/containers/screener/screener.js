@@ -50,7 +50,6 @@ class Screener extends Component {
                 )
                 .then((res) => {
                     this.setState({ ids: res.data });
-                    console.log(res);
                 });
         }
         document.body.style.overflow = 'auto';
@@ -282,8 +281,6 @@ class Screener extends Component {
         const indices = ['NSX', 'ccx'];
         const midSmallIndices = ['SML'];
         const usIndices = ['GSPC'];
-
-        console.log(this.state.ids);
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>

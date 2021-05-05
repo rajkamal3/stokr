@@ -46,20 +46,19 @@ class CompanySchema extends Component {
             return null;
         }
 
-        const anchorStyles = {
-            color: 'white',
-            fontWeight: 'bold'
-        };
-
         const searchEngine = this.props.searchEngine ? 'google' : 'bing';
 
         return (
             <div data-id={this.props.id} className={[styles.companyContainer, 'companyRow'].join(' ')}>
-                <div className={styles.nameCross}>
+                <div>
                     <a
                         className="companyName"
                         data-nse={this.state.companyDetails.nseId}
-                        style={anchorStyles}
+                        style={{
+                            color: 'white',
+                            fontWeight: 'bold',
+                            float: 'left'
+                        }}
                         target="_blank"
                         rel="noopener noreferrer"
                         href={(
@@ -74,9 +73,21 @@ class CompanySchema extends Component {
                             ? `${this.state.companyDetails.companyName}`.substr(0, 25) + '...'
                             : this.state.companyDetails.companyName}
                     </a>
-                    <div>
-                        <img data-id={this.props.id} onClick={this.props.clicked} src={cross} width="20px" alt="Delete" />
-                    </div>
+                    <span
+                        style={{
+                            float: 'right'
+                        }}
+                        className={styles.forMobile}
+                    >
+                        <img
+                            className={styles.cross}
+                            data-id={this.props.id}
+                            onClick={this.props.clicked}
+                            src={cross}
+                            width="20px"
+                            alt="Delete"
+                        />
+                    </span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
@@ -85,8 +96,31 @@ class CompanySchema extends Component {
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>52 Week Low: </span>
-                    <span>{this.state.companyDetails.oneYearLow}</span>
+                    <span
+                        style={{
+                            float: 'left',
+                            display: 'inherit',
+                            gridTemplateColumns: '135px 1fr'
+                        }}
+                    >
+                        <span className={styles.fontWeight600}>52 Week Low: </span>
+                        <span>{this.state.companyDetails.oneYearLow}</span>
+                    </span>
+                    <span
+                        style={{
+                            float: 'right'
+                        }}
+                        className={styles.forDesktop}
+                    >
+                        <img
+                            className={styles.cross}
+                            data-id={this.props.id}
+                            onClick={this.props.clicked}
+                            src={cross}
+                            width="20px"
+                            alt="Delete"
+                        />
+                    </span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>

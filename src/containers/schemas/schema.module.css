@@ -19,12 +19,13 @@
     font-weight: bold;
 }
 
-.nameCross {
-    display: flex;
-    justify-content: space-between;
+.companyTitle {
+    color: white;
+    font-weight: bold;
+    float: left;
 }
 
-.nameCross :last-child {
+.cross {
     cursor: pointer;
 }
 
@@ -54,6 +55,10 @@
     .fontWeight600 {
         font-weight: 600;
     }
+
+    .forDesktop {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 601px) and (max-width: 768px) {
@@ -70,6 +75,10 @@
         height: 85px;
         border-radius: 10px;
     }
+
+    .forMobile {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 769px) {
@@ -81,5 +90,9 @@
         margin-bottom: 15px;
         width: 92vw;
         border-radius: 10px;
+    }
+
+    .forMobile {
+        display: none;
     }
 }

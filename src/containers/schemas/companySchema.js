@@ -52,13 +52,8 @@ class CompanySchema extends Component {
             <div data-id={this.props.id} className={[styles.companyContainer, 'companyRow'].join(' ')}>
                 <div>
                     <a
-                        className="companyName"
+                        className={['companyName', styles.companyTitle].join(' ')}
                         data-nse={this.state.companyDetails.nseId}
-                        style={{
-                            color: 'white',
-                            fontWeight: 'bold',
-                            float: 'left'
-                        }}
                         target="_blank"
                         rel="noopener noreferrer"
                         href={(

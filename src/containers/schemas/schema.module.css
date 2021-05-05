@@ -19,6 +19,12 @@
     font-weight: bold;
 }
 
+.companyTitle {
+    color: white;
+    font-weight: bold;
+    float: left;
+}
+
 .cross {
     cursor: pointer;
 }

@@ -4,6 +4,8 @@ import LoginScreen from './screens/loginScreen';
 import Screener from './containers/screener/screener';
 import styles from './App.module.css';
 
+const userDetails = localStorage.getItem('userInfo');
+
 class App extends Component {
     render() {
         return (
@@ -12,7 +14,7 @@ class App extends Component {
                     <Route path="/login" component={LoginScreen} />
                     <Route path="/screener" component={Screener} />
                     <Route exact path="/">
-                        <Redirect to="/login" />
+                        <Redirect to={userDetails ? '/screener' : '/login'} />
                     </Route>
                 </div>
             </BrowserRouter>

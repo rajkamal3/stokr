@@ -1,4 +1,4 @@
-### [Stokr](https://beta-stokr.netlify.app)
+### [Stokr](https://stokr.netlify.app)
 
 In the project directory, you can run:
 

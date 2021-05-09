@@ -1,4 +1,4 @@
-### [Stock Screener](https://beta-stokr.netlify.app)
+### [Stock Screener](https://stokr.netlify.app)
 
 In the project directory, you can run:
 

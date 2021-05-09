@@ -25,6 +25,14 @@
     float: left;
 }
 
+.fontWeight300 {
+    font-weight: 300;
+}
+
+.fontWeight600 {
+    font-weight: 600;
+}
+
 .cross {
     cursor: pointer;
 }
@@ -52,10 +60,6 @@
         grid-template-columns: 135px 1fr;
     }
 
-    .fontWeight600 {
-        font-weight: 600;
-    }
-
     .forDesktop {
         display: none;
     }
@@ -69,6 +73,11 @@
         margin-bottom: 15px;
         width: 92vw;
         border-radius: 10px;
+    }
+
+    .companyDetailsGrid {
+        display: grid;
+        grid-template-columns: 125px 1fr;
     }
 
     .indices {
@@ -90,6 +99,11 @@
         margin-bottom: 15px;
         width: 92vw;
         border-radius: 10px;
+    }
+
+    .companyDetailsGrid {
+        display: grid;
+        grid-template-columns: 125px 1fr;
     }
 
     .forMobile {

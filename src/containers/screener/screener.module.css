@@ -28,6 +28,7 @@
     font-size: 100%;
     padding-left: 20px;
     box-sizing: border-box;
+    font-family: 'Gilroy';
 }
 
 .addButton {
@@ -40,6 +41,8 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     cursor: pointer;
+    font-family: 'Gilroy';
+    font-weight: 700;
 }
 
 .textbox:focus {
@@ -73,7 +76,6 @@
         border: none;
         border-radius: 100px;
         font-weight: 100;
-        letter-spacing: 1px;
         width: 80%;
         padding-left: 15px;
         box-sizing: border-box;

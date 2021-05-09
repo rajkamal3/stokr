@@ -85,19 +85,18 @@ class CompanySchema extends Component {
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>Share Price: </span>
+                    <span className={styles.fontWeight300}>Share Price</span>
                     <span className="sharePrice">{this.state.companyDetails.sharePrice}</span>
                 </div>
 
-                <div className={styles.companyDetailsGrid}>
+                <div>
                     <span
+                        className={styles.companyDetailsGrid}
                         style={{
-                            float: 'left',
-                            display: 'inherit',
-                            gridTemplateColumns: '135px 1fr'
+                            float: 'left'
                         }}
                     >
-                        <span className={styles.fontWeight600}>52 Week Low: </span>
+                        <span className={styles.fontWeight300}>52 Week Low</span>
                         <span>{this.state.companyDetails.oneYearLow}</span>
                     </span>
                     <span
@@ -118,27 +117,27 @@ class CompanySchema extends Component {
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>52 Week High: </span>
+                    <span className={styles.fontWeight300}>52 Week High</span>
                     <span>{this.state.companyDetails.oneYearHigh}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>Market Cap: </span>
+                    <span className={styles.fontWeight300}>Market Cap</span>
                     <span className="marketCap">{this.state.companyDetails.marketCap}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>PE Ratio: </span>
+                    <span className={styles.fontWeight300}>PE Ratio</span>
                     <span className="peRatio">{this.state.companyDetails.peRatio}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
-                    <span className={styles.fontWeight600}>Industry PE: </span>
+                    <span className={styles.fontWeight300}>Industry PE</span>
                     <span className="industryPe">{this.state.companyDetails.industryPe}</span>
                 </div>
 
                 <div className={['dayChange', 'dummy', styles.companyDetailsGrid].join(' ')}>
-                    <span className={styles.fontWeight600}>Day's Change: </span>
+                    <span className={styles.fontWeight300}>Day's Change</span>
                     <span
                         style={this.state.companyDetails.dayChange * 1 < 0 ? { color: '#EF5350' } : { color: '#9CCC65' }}
                         className="change"
@@ -148,7 +147,7 @@ class CompanySchema extends Component {
                 </div>
 
                 <div className={['companySector', styles.companyDetailsGrid].join(' ')}>
-                    <span className={styles.fontWeight600}>Sector: </span>
+                    <span className={styles.fontWeight300}>Sector</span>
                     <span>
                         {`${this.state.companyDetails.sector}`.length > 25
                             ? `${this.state.companyDetails.sector}`.substr(0, 25) + '...'

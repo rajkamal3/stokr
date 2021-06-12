@@ -10,7 +10,7 @@ class MidSmallIndicesSchema extends Component {
     componentDidMount() {
         axios
             .get(
-                `https://cors-anywhere.herokuapp.com/https://iislliveblob.blob.core.windows.net/jsonfiles/Intraday/IntradayNIFTY%20${this.props.id}CAP%20100.json`
+                `https://cors-stokr.herokuapp.com/https://iislliveblob.blob.core.windows.net/jsonfiles/Intraday/IntradayNIFTY%20${this.props.id}CAP%20100.json`
             )
             .then((res) => {
                 const { lastPrice, pChange, change } = res.data;

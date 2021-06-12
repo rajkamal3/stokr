@@ -92,7 +92,7 @@ class Screener extends Component {
         if (input.length >= 3) {
             document.querySelector('.inputValue').value = 'Adding...';
             axios
-                .get(`https://cors-anywhere.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
+                .get(`https://cors-stokr.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
                 .then((res) => {
                     const parsed = parse(res.data);
                     var compCode = parsed

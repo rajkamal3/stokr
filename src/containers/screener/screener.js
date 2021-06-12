@@ -91,8 +91,9 @@ class Screener extends Component {
 
         if (input.length >= 3) {
             document.querySelector('.inputValue').value = 'Adding...';
+
             axios
-                .get(`https://cors-anywhere.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
+                .get(`https://cors-stokr.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
                 .then((res) => {
                     const parsed = parse(res.data);
                     var compCode = parsed
@@ -150,6 +151,13 @@ class Screener extends Component {
                     setTimeout(() => {
                         document.querySelector('.inputValue').value = '';
                     }, 3000);
+                })
+                .catch((err) => {
+                    document.querySelector('.inputValue').value = 'Please try again later...';
+                    this.showAllCompanies();
+                    setTimeout(() => {
+                        document.querySelector('.inputValue').value = '';
+                    }, 5000);
                 });
         }
     };

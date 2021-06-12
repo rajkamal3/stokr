@@ -9,7 +9,7 @@ class USIndicesSchema extends Component {
     };
 
     componentDidMount() {
-        axios.get(`https://cors-anywhere.herokuapp.com/https://finance.yahoo.com/quote/%5E${this.props.id}`).then((res) => {
+        axios.get(`https://cors-stokr.herokuapp.com/https://finance.yahoo.com/quote/%5E${this.props.id}`).then((res) => {
             const parsed = parse(res.data);
 
             const spxData = parsed.querySelector('.quote-header-section').childNodes[2].querySelector('div');

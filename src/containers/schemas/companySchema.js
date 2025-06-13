@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import styles from './schema.module.css';
 import cross from './../../assets/images/cross.png';
+import { formatIndianCurrency, getPercFrom52WeekLow } from './../../utils/index';
 
 class CompanySchema extends Component {
     state = {
@@ -64,7 +65,7 @@ class CompanySchema extends Component {
                         ).toLowerCase()}
                     >
                         {`${this.state.companyDetails.companyName}`.length > 25
-                            ? `${this.state.companyDetails.companyName}`.substr(0, 25) + '...'
+                            ? `${this.state.companyDetails.companyName}`.substring(0, 25) + '...'
                             : this.state.companyDetails.companyName}
                     </a>
                     <span
@@ -86,7 +87,17 @@ class CompanySchema extends Component {
 
                 <div className={styles.companyDetailsGrid}>
                     <span className={styles.fontWeight300}>Share Price</span>
-                    <span className="sharePrice">{this.state.companyDetails.sharePrice}</span>
+                    <span className="sharePrice">
+                        <span>{formatIndianCurrency(this.state.companyDetails.sharePrice)}</span>
+                        <span
+                            style={{
+                                fontSize: '10px'
+                            }}
+                        >
+                            &nbsp;&#40;{getPercFrom52WeekLow(this.state.companyDetails.sharePrice, this.state.companyDetails.oneYearLow)}%
+                            from 52W low&#41;
+                        </span>
+                    </span>
                 </div>
 
                 <div>
@@ -97,7 +108,7 @@ class CompanySchema extends Component {
                         }}
                     >
                         <span className={styles.fontWeight300}>52 Week Low</span>
-                        <span>{this.state.companyDetails.oneYearLow}</span>
+                        <span>{formatIndianCurrency(this.state.companyDetails.oneYearLow)}</span>
                     </span>
                     <span
                         style={{
@@ -118,12 +129,12 @@ class CompanySchema extends Component {
 
                 <div className={styles.companyDetailsGrid}>
                     <span className={styles.fontWeight300}>52 Week High</span>
-                    <span>{this.state.companyDetails.oneYearHigh}</span>
+                    <span>{formatIndianCurrency(this.state.companyDetails.oneYearHigh)}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
                     <span className={styles.fontWeight300}>Market Cap</span>
-                    <span className="marketCap">{this.state.companyDetails.marketCap}</span>
+                    <span className="marketCap">{formatIndianCurrency(this.state.companyDetails.marketCap)}</span>
                 </div>
 
                 <div className={styles.companyDetailsGrid}>
@@ -150,7 +161,7 @@ class CompanySchema extends Component {
                     <span className={styles.fontWeight300}>Sector</span>
                     <span>
                         {`${this.state.companyDetails.sector}`.length > 25
-                            ? `${this.state.companyDetails.sector}`.substr(0, 25) + '...'
+                            ? `${this.state.companyDetails.sector}`.substring(0, 25) + '...'
                             : this.state.companyDetails.sector}
                     </span>
                 </div>

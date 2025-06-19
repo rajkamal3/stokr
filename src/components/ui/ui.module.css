@@ -6,6 +6,7 @@
     z-index: 9999;
     display: flex;
     justify-content: space-between;
+    position: sticky;
 }
 
 .hamburgerAndDp {

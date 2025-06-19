@@ -70,21 +70,27 @@
     border-bottom-right-radius: 10px;
 }
 
+.searchResults {
+    width: 84%;
+    height: 28px;
+    background-color: #100f17;
+    border: none;
+    color: white;
+}
+
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .textbox {
         height: 40px;
         border: none;
         border-radius: 100px;
         font-weight: 500;
-        width: 80%;
+        width: 94%;
         padding-left: 15px;
         box-sizing: border-box;
         margin: 1px 0px;
         background-color: #18151e;
         color: white;
         font-size: 100%;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
     }
 
     .textbox:focus {

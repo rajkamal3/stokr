@@ -6,9 +6,23 @@ import USIndicesSchema from '../schemas/usIndicesSchema';
 import Header from '../../components/ui/header';
 import Sidebar from '../../components/ui/sidebar';
 import axios from 'axios';
-import parse from 'node-html-parser';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
+
+const niftySmallcap250 = [
+    {
+        name: 'Aadhar Housing Finance',
+        id: 'AHFL'
+    },
+    {
+        name: 'Aarti Industries',
+        id: 'AI'
+    },
+    {
+        name: 'Aavas Financiers',
+        id: 'AF32'
+    }
+];
 
 class Screener extends Component {
     state = {
@@ -17,7 +31,9 @@ class Screener extends Component {
         ids: [],
         showMenu: false,
         modalActive: false,
-        searchEngine: false
+        searchEngine: false,
+        typing: '',
+        searchResults: []
     };
 
     componentDidMount() {
@@ -86,84 +102,25 @@ class Screener extends Component {
         });
     };
 
-    addNewCompany = () => {
-        var input = document.querySelector('.inputValue').value.toLowerCase();
+    addNewCompany = (e) => {
+        const typedValue = e.target.value.toLowerCase();
 
-        if (input.length >= 3) {
-            document.querySelector('.inputValue').value = 'Adding...';
+        this.setState({
+            typing: typedValue
+        });
 
-            axios
-                .get(`https://cors-stokr.herokuapp.com/https://www.bing.com/search?q=moneycontrol%20stockpricequote%20${input}`)
-                .then((res) => {
-                    const parsed = parse(res.data);
-                    var compCode = parsed
-                        .querySelector('#b_results')
-                        .querySelectorAll('.b_algo')[0]
-                        .querySelector('a')
-                        .getAttribute('href')
-                        .split('/')[7];
-                    return compCode;
-                })
-                .then((compCode) => {
-                    axios
-                        .get(`https://www.moneycontrol.com/india/stockpricequote/computers-software-training/aptech/${compCode}`)
-                        .then((res) => {
-                            const parsed = parse(res.data);
-                            if (!parsed.querySelector('#scid')) {
-                                document.querySelector('.inputValue').value = 'No company by that name!';
-                                this.showAllCompanies();
-                                setTimeout(() => {
-                                    document.querySelector('.inputValue').value = '';
-                                }, 3000);
-                                return;
-                            }
-                            var compCode = parsed.querySelector('#scid').attributes.value;
-                            let currentIds;
-                            if (!this.state.ids) {
-                                return;
-                            } else {
-                                currentIds = this.state.ids;
-                            }
+        if (typedValue.length >= 3) {
+            const matchingCompanies = niftySmallcap250.filter((el) => el.name.toLowerCase().startsWith(typedValue)) || false;
 
-                            if (!currentIds.includes(compCode)) {
-                                currentIds.unshift(compCode);
-                            } else {
-                                document.querySelector('.inputValue').value = 'Company already added!';
-                                setTimeout(() => {
-                                    document.querySelector('.inputValue').value = '';
-                                }, 3000);
-                            }
-
-                            this.setState({ ids: currentIds });
-                            if (this.props.history.location.pathname.split('/')[2] === 'guest') {
-                                localStorage.setItem('companies', currentIds);
-                            } else {
-                                axios.put(
-                                    `https://stokr-beta.firebaseio.com/${
-                                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
-                                    }/companies/.json`,
-                                    currentIds
-                                );
-                            }
-                        });
-                    document.querySelector('.inputValue').value = 'Added';
-                    this.showAllCompanies();
-                    setTimeout(() => {
-                        document.querySelector('.inputValue').value = '';
-                    }, 3000);
-                })
-                .catch((err) => {
-                    document.querySelector('.inputValue').value = 'Please try again later...';
-                    this.showAllCompanies();
-                    setTimeout(() => {
-                        document.querySelector('.inputValue').value = '';
-                    }, 5000);
-                });
+            this.setState({ searchResults: matchingCompanies });
+        } else if (typedValue.length < 3) {
+            this.setState({ searchResults: [] });
         }
     };
 
     hideMenu = () => {
         this.setState({ showMenu: !this.state.showMenu });
+
         if (this.state.showMenu) {
             document.body.style.overflow = '';
         } else {
@@ -285,6 +242,37 @@ class Screener extends Component {
         }
     };
 
+    setSelectedCompany = (compCode) => {
+        let currentIds;
+
+        if (!this.state.ids) {
+            return;
+        } else {
+            currentIds = this.state.ids;
+        }
+
+        if (!currentIds.includes(compCode)) {
+            currentIds.unshift(compCode);
+        } else {
+            alert('Company already exists!');
+
+            document.querySelector('.inputValue').value = '';
+        }
+
+        if (this.props.history.location.pathname.split('/')[2] === 'guest') {
+            localStorage.setItem('companies', currentIds);
+        } else {
+            axios.put(
+                `https://stokr-beta.firebaseio.com/${
+                    this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                }/companies/.json`,
+                currentIds
+            );
+        }
+
+        this.setState({ searchResults: [] });
+    };
+
     render() {
         const indices = ['NSX', 'ccx'];
         const midSmallIndices = ['SML'];
@@ -303,16 +291,63 @@ class Screener extends Component {
                     history={this.props.history}
                 />
                 <Header clicked={this.hideMenu.bind(this)} />
-                <div className={[styles.searchBar, 'search'].join(' ')}>
-                    <input
-                        onChange={this.filterCompanies.bind(this)}
-                        type="textbox"
-                        placeholder="Search for companies or sectors..."
-                        className={[styles.textbox, 'inputValue'].join(' ')}
-                    />
-                    <button className={styles.addButton} onClick={this.addNewCompany.bind(this)}>
-                        Add
-                    </button>
+
+                <div
+                    className={[styles.searchBar, 'search'].join(' ')}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}
+                >
+                    <div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <input
+                                onChange={this.addNewCompany.bind(this)}
+                                type="textbox"
+                                placeholder="Search for companies or sectors..."
+                                className={[styles.textbox, 'inputValue'].join(' ')}
+                            />
+                        </div>
+
+                        <div
+                            style={{
+                                position: 'absolute',
+                                width: '100%'
+                            }}
+                        >
+                            {this.state.searchResults.length > 0 && (
+                                <>
+                                    {this.state.searchResults.map((el) => {
+                                        return (
+                                            <div
+                                                key={el.id}
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                <button
+                                                    style={{
+                                                        width: '84%',
+                                                        borderRadius: '8px'
+                                                    }}
+                                                    onClick={this.setSelectedCompany.bind(this, el.id)}
+                                                    className={styles.searchResults}
+                                                >
+                                                    {el.name}
+                                                </button>
+                                            </div>
+                                        );
+                                    })}
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.indicesContainer}>

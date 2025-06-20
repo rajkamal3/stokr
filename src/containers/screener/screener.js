@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
 import CompanySchema from '../schemas/companySchema';
-import IndicesSchema from '../schemas/indicesSchema';
-import MidSmallIndicesSchema from '../schemas/midsmallIndicesSchema';
-import USIndicesSchema from '../schemas/usIndicesSchema';
+// import IndicesSchema from '../schemas/indicesSchema';
+// import MidSmallIndicesSchema from '../schemas/midsmallIndicesSchema';
+// import USIndicesSchema from '../schemas/usIndicesSchema';
 import Header from '../../components/ui/header';
 import Sidebar from '../../components/ui/sidebar';
 import axios from 'axios';
 import styles from './screener.module.css';
 import { connect } from 'react-redux';
-
-const niftySmallcap250 = [
-    {
-        name: 'Aadhar Housing Finance',
-        id: 'AHFL'
-    },
-    {
-        name: 'Aarti Industries',
-        id: 'AI'
-    },
-    {
-        name: 'Aavas Financiers',
-        id: 'AF32'
-    }
-];
+import { niftySmallcap250 } from './../../data/indices/niftySmallcap250';
+import Form from 'react-bootstrap/Form';
 
 class Screener extends Component {
     state = {
@@ -273,10 +260,29 @@ class Screener extends Component {
         this.setState({ searchResults: [] });
     };
 
+    changeSelection = (e) => {
+        if (e.target.value === 'Nifty Smallcap 250') {
+            const niftySmallcap250Ids = niftySmallcap250.map((el) => el.id);
+            this.setState({ ids: niftySmallcap250Ids });
+        }
+
+        if (e.target.value === 'My Companies') {
+            axios
+                .get(
+                    `https://stokr-beta.firebaseio.com/${
+                        this.props.userId === null ? this.state.userId : JSON.parse(localStorage.getItem('userInfo')).userId
+                    }/companies.json`
+                )
+                .then((res) => {
+                    this.setState({ ids: res.data });
+                });
+        }
+    };
+
     render() {
-        const indices = ['NSX', 'ccx'];
-        const midSmallIndices = ['SML'];
-        const usIndices = ['GSPC'];
+        // const indices = ['NSX', 'ccx'];
+        // const midSmallIndices = ['SML'];
+        // const usIndices = ['GSPC'];
 
         return (
             <div className={[styles.container, 'container'].join(' ')}>
@@ -350,7 +356,7 @@ class Screener extends Component {
                     </div>
                 </div>
 
-                <div className={styles.indicesContainer}>
+                {/* <div className={styles.indicesContainer}>
                     {indices.map((el) => {
                         return <IndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
                     })}
@@ -360,6 +366,15 @@ class Screener extends Component {
                     {usIndices.map((el) => {
                         return <USIndicesSchema searchEngine={this.state.searchEngine} key={el} id={el} />;
                     })}
+                </div> */}
+
+                <div>
+                    <Form.Group>
+                        <Form.Control as="select" onChange={this.changeSelection.bind(this)}>
+                            <option>My Companies</option>
+                            <option>Nifty Smallcap 250</option>
+                        </Form.Control>
+                    </Form.Group>
                 </div>
 
                 <div className="companiesContainer">
